@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="storm-research" name="inema-course"/>
+<meta content="Trilha 2 — Práctica de STORM: la anatomía de la skill storm-research, cómo instalarla, el pipeline en cuatro fases y tu primer informe verificado." name="description"/>
+<script>
+  (function () {
+    try {
+      var html = document.documentElement;
+      var DEF = { theme: 'inema-dark', font: 'inter', fontScale: 100, lineWidth: 68, leading: 1.7, accent: 'emerald' };
+      function clone(o){var r={};for(var x in o)r[x]=o[x];return r;}
+      var p = clone(DEF);
+      try {
+        var raw = localStorage.getItem('inema.prefs');
+        if (raw) { var parsed = JSON.parse(raw); if (parsed && typeof parsed==='object'){ for (var k in DEF) if (parsed[k]!=null) p[k]=parsed[k]; } }
+        else { var legacy = localStorage.getItem('theme'); if (legacy==='light') p.theme='claro'; else if (legacy==='dark') p.theme='inema-dark'; }
+      } catch (e) { p = clone(DEF); }
+      var THEMES = { 'inema-dark':{dark:true,attr:null,cs:'dark'},'claro':{dark:false,attr:null,cs:'light'},'sepia':{dark:false,attr:'sepia',cs:'light'},'foco':{dark:null,attr:'foco',cs:null},'contraste':{dark:true,attr:'contraste',cs:'dark'} };
+      var t = THEMES[p.theme] || THEMES['inema-dark'];
+      if (t.dark === true) html.classList.add('dark'); else if (t.dark === false) html.classList.remove('dark');
+      if (t.attr) html.setAttribute('data-theme', t.attr); else html.removeAttribute('data-theme');
+      html.style.colorScheme = (t.cs ? t.cs : (html.classList.contains('dark') ? 'dark' : 'light'));
+      html.setAttribute('data-font', p.font || 'inter'); html.setAttribute('data-accent', p.accent || 'emerald');
+      var s = html.style, scale = (+p.fontScale || 100);
+      s.setProperty('--inema-font-scale', (scale/100).toString()); s.setProperty('font-size', scale + '%');
+      s.setProperty('--measure', (+p.lineWidth || 68) + 'ch'); s.setProperty('--lh-body', (+p.leading || 1.7).toString());
+      var fam = p.font === 'system' ? 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif' : (p.font === 'leitura' ? '"Atkinson Hyperlegible", "Inter", system-ui, sans-serif' : '"Inter", system-ui, sans-serif');
+      s.setProperty('--font-body', fam);
+      var ACC = { emerald:[152,76,45], blue:[217,91,60], purple:[258,90,66], amber:[38,92,50], teal:[174,72,41], rose:[350,89,60] };
+      var a = ACC[p.accent] || ACC.emerald;
+      s.setProperty('--accent-h', a[0]+''); s.setProperty('--accent-s', a[1]+'%'); s.setProperty('--accent-l', a[2]+'%'); s.setProperty('--accent', 'hsl('+a[0]+' '+a[1]+'% '+a[2]+'%)');
+    } catch (err) { try { document.documentElement.classList.add('dark'); document.documentElement.style.colorScheme='dark'; } catch(e){} }
+  })();
+  </script>
+<title>Trilha 2 · Práctica | STORM Research</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="../../../assets/learn.css" rel="stylesheet"/>
+<script data-inema-manifest="" type="application/json">
+  {
+    "course": "storm-research",
+    "tracks": [
+      { "n": "1", "title": "Fundamentos", "modules": [
+        { "id": "1-1", "title": "1.1 O problema do prompt unico", "topics": 6, "href": "curso/trilha1/modulo-1-1.html" },
+        { "id": "1-2", "title": "1.2 As cinco lentes", "topics": 6, "href": "curso/trilha1/modulo-1-2.html" },
+        { "id": "1-3", "title": "1.3 Subagentes, contradicoes e verificacao", "topics": 6, "href": "curso/trilha1/modulo-1-3.html" }
+      ]},
+      { "n": "2", "title": "Pratica", "modules": [
+        { "id": "2-1", "title": "2.1 Anatomia da skill", "topics": 6, "href": "curso/trilha2/modulo-2-1.html" },
+        { "id": "2-2", "title": "2.2 Instalar a skill", "topics": 6, "href": "curso/trilha2/modulo-2-2.html" },
+        { "id": "2-3", "title": "2.3 O pipeline em 4 fases", "topics": 6, "href": "curso/trilha2/modulo-2-3.html" },
+        { "id": "2-4", "title": "2.4 Seu primeiro relatorio", "topics": 6, "href": "curso/trilha2/modulo-2-4.html" }
+      ]},
+      { "n": "3", "title": "Avancado", "modules": [
+        { "id": "3-1", "title": "3.1 Anatomia do relatorio HTML", "topics": 6, "href": "curso/trilha3/modulo-3-1.html" },
+        { "id": "3-2", "title": "3.2 O sistema de verificacao", "topics": 6, "href": "curso/trilha3/modulo-3-2.html" },
+        { "id": "3-3", "title": "3.3 Customizar e estender", "topics": 6, "href": "curso/trilha3/modulo-3-3.html" },
+        { "id": "3-4", "title": "3.4 Boas praticas e armadilhas", "topics": 6, "href": "curso/trilha3/modulo-3-4.html" }
+      ]}
+    ]
+  }
+  </script>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    [data-inema-topic], [id^="topico-"], [id^="modulo-"] { scroll-margin-top: 5rem; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .bg-blue-500\/20 { background-color: rgba(37,99,235,0.12); }
+    html:not(.dark) .bg-blue-500\/10 { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37,99,235,0.25); }
+    html:not(.dark) .hover\:bg-blue-500\/30:hover { background-color: rgba(37,99,235,0.18); }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37,99,235,0.08); }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .group:hover .group-hover\:text-blue-400 { color: #2563eb; }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5,150,105,0.08); }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124,58,237,0.08); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161,98,7,0.08); }
+    html:not(.dark) .border-primary\/30 { border-color: rgba(161,98,7,0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .text-red-400 { color: #b91c1c; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255,255,255,0.95); }
+    .dark .border-dark-600 { border-color: #374151; }
+    .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
+    html:not(.dark) svg[role="img"] { filter: saturate(0.82) brightness(0.96); }
+    @keyframes wf-pulse { 0%,100% { opacity:.55 } 50% { opacity:1 } }
+    @media (prefers-reduced-motion: no-preference) {
+      .wf-a { animation: wf-pulse 2.6s ease-in-out infinite; }
+      .wf-a:nth-child(2){animation-delay:.25s} .wf-a:nth-child(3){animation-delay:.5s}
+      .wf-a:nth-child(4){animation-delay:.75s} .wf-a:nth-child(5){animation-delay:1s}
+    }
+  </style>
+<link href="https://inematds.github.io/storm-research/curso/trilha2/" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/storm-research/en/curso/trilha2/" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/storm-research/es/curso/trilha2/" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../../../curso/trilha2/" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="../../../en/curso/trilha2/" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="./" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">ES</a></div>
+<a class="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-2 focus:left-2 focus:px-4 focus:py-2 focus:bg-dark-800 focus:text-blue-400 focus:rounded-lg" href="#conteudo">Saltar al contenido</a>
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="../../index.html">
+<span class="text-2xl">🌩️</span><span class="font-bold text-lg hidden sm:inline">STORM Research</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html">
+<span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span>
+</a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-400 bg-blue-500/10" href="index.html">
+<span class="sm:hidden">T2</span><span class="hidden sm:inline">Practica</span>
+</a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="../trilha3/index.html">
+<span class="sm:hidden">T3</span><span class="hidden sm:inline">Avanzado</span>
+</a>
+<button class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors text-sm" data-inema-journey-open="" type="button">
+<span aria-hidden="true">◷</span><span>Mi recorrido</span>
+<span aria-hidden="true" class="inema-journey-badge" data-count="0" data-inema-journey-badge=""></span>
+</button>
+<div class="relative">
+<button aria-expanded="false" aria-haspopup="true" class="inema-appearance-trigger" data-inema-appearance-toggle="#appearance-pop" title="Apariencia y lectura" type="button">
+<span aria-hidden="true">◑</span><span class="hidden sm:inline text-sm">Apariencia</span>
+</button>
+<div class="inema-appearance-pop" data-inema-appearance="" data-open="false" id="appearance-pop" style="right:0;">
+<div class="inema-pref-group"><span class="inema-pref-group__label">Tema</span><div class="inema-segment">
+<button data-inema-set-theme="inema-dark" type="button">Oscuro</button>
+<button data-inema-set-theme="claro" type="button">Claro</button>
+<button data-inema-set-theme="sepia" type="button">Sepia</button>
+<button data-inema-set-theme="contraste" type="button">Alto contraste</button>
+</div></div>
+<div class="inema-pref-group"><span class="inema-pref-group__label">Fuente</span><div class="inema-segment">
+<button data-inema-set-font="inter" type="button">Inter</button>
+<button data-inema-set-font="system" type="button">Sistema</button>
+<button data-inema-set-font="leitura" type="button">Lectura</button>
+</div></div>
+<div class="inema-pref-group"><span class="inema-pref-group__label">Tamaño</span><div class="inema-segment">
+<button data-inema-set-fontscale="100" type="button">A</button>
+<button data-inema-set-fontscale="112" type="button">A+</button>
+<button data-inema-set-fontscale="125" type="button">A++</button>
+</div></div>
+<div class="inema-pref-group"><span class="inema-pref-group__label">Interlineado</span><div class="inema-segment">
+<button data-inema-set-leading="1.45" type="button">Compacto</button>
+<button data-inema-set-leading="1.7" type="button">Cómodo</button>
+</div></div>
+<div class="inema-pref-group"><span class="inema-pref-group__label">Acento</span><div class="inema-accent-grid">
+<button data-accent="emerald" data-inema-set-accent="emerald" title="Esmeralda" type="button"></button>
+<button data-accent="blue" data-inema-set-accent="blue" title="Azul" type="button"></button>
+<button data-accent="purple" data-inema-set-accent="purple" title="Morado" type="button"></button>
+<button data-accent="amber" data-inema-set-accent="amber" title="Ámbar" type="button"></button>
+<button data-accent="teal" data-inema-set-accent="teal" title="Teal" type="button"></button>
+<button data-accent="rose" data-inema-set-accent="rose" title="Rosa" type="button"></button>
+</div></div>
+</div>
+</div>
+<button aria-label="Alternar entre claro y oscuro" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-1" id="theme-toggle" title="Alternar entre claro y oscuro">
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-dark-icon" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg class="hidden w-5 h-5 text-neutral-300" fill="currentColor" id="theme-toggle-light-icon" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<header class="bg-gradient-to-br from-blue-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full mb-4">TRILHA 2</span>
+<h1 class="text-3xl sm:text-4xl font-bold mb-4">🔵 Práctica</h1>
+<p class="text-lg text-neutral-400 max-w-3xl">Manos a la obra. Aquí abres la skill <code class="font-mono">storm-research</code> por dentro, la instalas en Claude Code, recorres el pipeline de cuatro fases (alcance → perspectivas → síntesis → verificación) y generas tu primer informe verificado.</p>
+<div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">4</div><div class="text-xs text-neutral-400">Módulos</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">24</div><div class="text-xs text-neutral-400">Temas</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">~2.5h</div><div class="text-xs text-neutral-400">Duración</div></div>
+<div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-blue-400">Intermedio</div><div class="text-xs text-neutral-400">Nivel</div></div>
+</div>
+<div class="mt-6 max-w-md">
+<div aria-label="Progreso de la ruta 2" aria-valuemax="100" aria-valuemin="0" class="inema-meter" data-inema-meter="trilha:2" role="progressbar">
+<div class="inema-meter-label flex items-center justify-between mb-2"><strong class="text-sm">Progreso de la ruta</strong><span class="inema-meter-pct text-blue-400 font-bold">0%</span></div>
+<div class="inema-bar"><span class="inema-bar__fill"></span></div>
+<span class="inema-meter-count text-xs text-neutral-400">0 de 24 temas</span>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12" id="conteudo">
+<!-- HERO SVG -->
+<section class="mb-12">
+<div class="rounded-2xl border border-blue-500/30 bg-dark-900/40 p-3 sm:p-4 overflow-hidden">
+<svg aria-label="Un tema pasa por la skill storm-research y recorre cinco fases —alcance, perspectivas, mapa, síntesis y verificación— hasta producir un informe HTML verificado" class="w-full h-auto" role="img" viewbox="0 0 1000 240">
+<defs>
+<lineargradient id="t2-grad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#60a5fa"></stop><stop offset="1" stop-color="#3b82f6"></stop></lineargradient>
+<filter height="180%" id="t2-glow" width="180%" x="-40%" y="-40%"><fegaussianblur result="b" stddeviation="1.8"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter>
+<pattern height="32" id="t2-grid" patternunits="userSpaceOnUse" width="32"><circle cx="1.3" cy="1.3" fill="#3b82f6" opacity="0.12" r="1.3"></circle></pattern>
+<marker id="t2-ah" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#60a5fa"></path></marker>
+<marker id="t2-ahc" markerheight="9" markerwidth="9" orient="auto" refx="6.5" refy="4.5"><path d="M0,0 L8,4.5 L0,9 L2.4,4.5 Z" fill="#38bdf8"></path></marker>
+</defs>
+<rect fill="url(#t2-grid)" height="240" width="1000" x="0" y="0"></rect>
+<g fill="none" opacity="0.65" stroke="#60a5fa" stroke-width="2">
+<path d="M196,120 C300,120 320,38 452,38" marker-end="url(#t2-ah)"></path>
+<path d="M196,120 C300,120 320,79 452,79" marker-end="url(#t2-ah)"></path>
+<path d="M196,120 L452,120" marker-end="url(#t2-ah)"></path>
+<path d="M196,120 C300,120 320,161 452,161" marker-end="url(#t2-ah)"></path>
+<path d="M196,120 C300,120 320,202 452,202" marker-end="url(#t2-ah)"></path>
+</g>
+<g fill="none" opacity="0.55" stroke="#38bdf8" stroke-width="2">
+<path d="M588,38  C700,38 720,120 800,120" marker-end="url(#t2-ahc)"></path>
+<path d="M588,79  C700,79 720,120 800,120" marker-end="url(#t2-ahc)"></path>
+<path d="M588,120 L800,120" marker-end="url(#t2-ahc)"></path>
+<path d="M588,161 C700,161 720,120 800,120" marker-end="url(#t2-ahc)"></path>
+<path d="M588,202 C700,202 720,120 800,120" marker-end="url(#t2-ahc)"></path>
+</g>
+<g filter="url(#t2-glow)"><rect fill="#0e1622" height="64" rx="14" stroke="url(#t2-grad)" stroke-width="2.5" width="156" x="40" y="88"></rect></g>
+<text fill="#60a5fa" font-family="Inter,sans-serif" font-size="18" font-weight="600" text-anchor="middle" x="118" y="116">Tema</text>
+<text fill="#bfdbfe" font-family="Inter,sans-serif" font-size="12" text-anchor="middle" x="118" y="135">+ skill</text>
+<g font-family="Inter,sans-serif" font-size="12.5" font-weight="600">
+<g class="wf-a"><rect fill="#0e1b26" height="32" rx="9" stroke="#38bdf8" stroke-width="2" width="136" x="452" y="22"></rect><text fill="#bfe6ff" text-anchor="middle" x="520" y="43">🎯 alcance</text></g>
+<g class="wf-a"><rect fill="#0e1b26" height="32" rx="9" stroke="#38bdf8" stroke-width="2" width="136" x="452" y="63"></rect><text fill="#bfe6ff" text-anchor="middle" x="520" y="84">🔭 perspectivas</text></g>
+<g class="wf-a"><rect fill="#0e1b26" height="32" rx="9" stroke="#38bdf8" stroke-width="2" width="136" x="452" y="104"></rect><text fill="#bfe6ff" text-anchor="middle" x="520" y="125">🗺️ mapa</text></g>
+<g class="wf-a"><rect fill="#0e1b26" height="32" rx="9" stroke="#38bdf8" stroke-width="2" width="136" x="452" y="145"></rect><text fill="#bfe6ff" text-anchor="middle" x="520" y="166">🧱 síntesis</text></g>
+<g class="wf-a"><rect fill="#0e1b26" height="32" rx="9" stroke="#38bdf8" stroke-width="2" width="136" x="452" y="186"></rect><text fill="#bfe6ff" text-anchor="middle" x="520" y="207">✅ verificar</text></g>
+</g>
+<g filter="url(#t2-glow)"><rect fill="#0e1622" height="64" rx="14" stroke="url(#t2-grad)" stroke-width="2.5" width="160" x="800" y="88"></rect></g>
+<text fill="#60a5fa" font-family="Inter,sans-serif" font-size="15" font-weight="600" text-anchor="middle" x="880" y="116">Informe</text>
+<text fill="#bfdbfe" font-family="Inter,sans-serif" font-size="11.5" text-anchor="middle" x="880" y="135">HTML verificado</text>
+</svg>
+</div>
+<p class="text-xs text-neutral-500 mt-2">Con la skill instalada, indicas un tema y el pipeline ejecuta cinco fases (cian): alcance, perspectivas, mapa, síntesis y verificación, hasta obtener el informe HTML verificado. Es el mapa mental de la Ruta 2.</p>
+</section>
+<!-- MAPA DA TRILHA -->
+<section class="mb-12">
+<h2 class="text-2xl font-bold mb-6">Mapa de la ruta</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all" href="#modulo-2-1">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.1</span><span class="text-xs text-neutral-500">~35 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">📄 Anatomía de la skill</h3>
+<p class="text-xs text-neutral-400">Dos archivos, un pipeline</p>
+</a>
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all" href="#modulo-2-2">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.2</span><span class="text-xs text-neutral-500">~30 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">⬇️ Instalar la skill</h3>
+<p class="text-xs text-neutral-400">Descargar y soltar en la carpeta</p>
+</a>
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all" href="#modulo-2-3">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.3</span><span class="text-xs text-neutral-500">~40 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">⚙️ El pipeline en 4 fases</h3>
+<p class="text-xs text-neutral-400">Alcance → perspectivas → verificación</p>
+</a>
+<a class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all" href="#modulo-2-4">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.4</span><span class="text-xs text-neutral-500">~35 min</span></div>
+<h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">🧭 Tu primer informe</h3>
+<p class="text-xs text-neutral-400">Del prompt al HTML</p>
+</a>
+</div>
+</section>
+<h2 class="text-2xl font-bold mb-6">Contenido detallado</h2>
+<!-- MÓDULO 2.1 -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" id="modulo-2-1">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.1</span><span class="text-xs text-neutral-500">~35 min</span></div>
+<h3 class="text-2xl font-bold mb-2">📄 Anatomía de la skill storm-research</h3>
+<p class="text-neutral-400 text-sm">Cómo está hecha la skill por dentro: dos archivos, un frontmatter que la activa y las protecciones que hacen confiable el informe.</p>
+<div class="mt-3 max-w-xs"><div aria-label="Progreso del módulo 2.1" aria-valuemax="100" aria-valuemin="0" class="inema-meter" data-inema-meter="modulo:2-1" role="progressbar"><div class="inema-bar"><span class="inema-bar__fill"></span></div><span class="inema-meter-count text-xs text-neutral-500">0 de 6</span></div></div>
+</div>
+<div class="divide-y divide-dark-600">
+<div class="topic-item">
+<button aria-controls="t2-1-1" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">📄</span><div><span class="font-medium">Los dos archivos</span><span class="text-neutral-500 text-sm ml-2">- SKILL.md + report-template.html</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t2-1-1"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">Qué es:</span> <p class="text-neutral-300 text-sm">La skill son dos archivos en una carpeta: <code class="font-mono">SKILL.md</code> (el pipeline en texto) y <code class="font-mono">report-template.html</code> (la plantilla del informe).</p></div>
+<div><span class="text-blue-400 font-semibold">Por qué aprender:</span> <p class="text-neutral-300 text-sm">Entender que "skill = dos archivos" desmitifica la instalación y muestra exactamente qué copiar.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceptos clave:</span> <p class="text-neutral-300 text-sm">SKILL.md · report-template.html · carpeta de la skill.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-controls="t2-1-2" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">🏷️</span><div><span class="font-medium">El frontmatter</span><span class="text-neutral-500 text-sm ml-2">- qué hace que Claude sepa cuándo usarlo</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t2-1-2"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">Qué es:</span> <p class="text-neutral-300 text-sm">El bloque de la parte superior del <code class="font-mono">SKILL.md</code> con <code class="font-mono">name</code>, <code class="font-mono">description</code> e <code class="font-mono">argument-hint</code>; a <code class="font-mono">description</code> es el disparador que Claude lee para invocar la skill.</p></div>
+<div><span class="text-blue-400 font-semibold">Por qué aprender:</span> <p class="text-neutral-300 text-sm">É a <code class="font-mono">description</code> que hace que STORM se active cuando pides una investigación; entender esto evita el "¿por qué no se ejecutó?".</p></div>
+<div><span class="text-blue-400 font-semibold">Conceptos clave:</span> <p class="text-neutral-300 text-sm">name · description · argument-hint · gatilho.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-controls="t2-1-3" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">🧳</span><div><span class="font-medium">Autocontenida y portátil</span><span class="text-neutral-500 text-sm ml-2">- solo herramientas nativas</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t2-1-3"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">Qué es:</span> <p class="text-neutral-300 text-sm">La skill solo usa herramientas nativas (Agent, Write, búsqueda/fetch en la web); sin scripts externos, APIs ni servicios de pago.</p></div>
+<div><span class="text-blue-400 font-semibold">Por qué aprender:</span> <p class="text-neutral-300 text-sm">Como es autocontenida, basta con soltar la carpeta en <code class="font-mono">.claude/skills/</code> y funciona en cualquier máquina.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceptos clave:</span> <p class="text-neutral-300 text-sm">Autocontenida · portátil · herramientas nativas.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-controls="t2-1-4" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">🎨</span><div><span class="font-medium">La plantilla HTML</span><span class="text-neutral-500 text-sm ml-2">- clonar, nunca recrear el CSS</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t2-1-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">Qué es:</span> <p class="text-neutral-300 text-sm"><code class="font-mono">report-template.html</code> es la plantilla visual del informe; el pipeline la clona y la completa, sin reescribir el CSS.</p></div>
+<div><span class="text-blue-400 font-semibold">Por qué aprender:</span> <p class="text-neutral-300 text-sm">Mantener intacta la plantilla garantiza informes limpios y coherentes: Montserrat, Roboto Mono y resaltado azul.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceptos clave:</span> <p class="text-neutral-300 text-sm">Template · clonar · identidad visual.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-controls="t2-1-5" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">💸</span><div><span class="font-medium">~9–11 agentes por ejecución</span><span class="text-neutral-500 text-sm ml-2">- 5 perspectivas + verificadores</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t2-1-5"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">Qué es:</span> <p class="text-neutral-300 text-sm">Una ejecución crea alrededor de 9 a 11 agentes: 5 perspectivas en la Fase 1 y ~4 a 6 verificadores en la Fase 4.</p></div>
+<div><span class="text-blue-400 font-semibold">Por qué aprender:</span> <p class="text-neutral-300 text-sm">Conocer el costo esperado evita sorpresas y te impide ampliar el panel más allá de lo recomendado.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceptos clave:</span> <p class="text-neutral-300 text-sm">Costo · 5 perspectivas · 1 verificador por clúster.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-controls="t2-1-6" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">🛡️</span><div><span class="font-medium">Protecciones integradas</span><span class="text-neutral-500 text-sm ml-2">- investigación real, nada inventado</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t2-1-6"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">Qué es:</span> <p class="text-neutral-300 text-sm">Las reglas de seguridad de la skill: solo fuentes reales, nada inventado, y lo que no se verifica se degrada o se elimina.</p></div>
+<div><span class="text-blue-400 font-semibold">Por qué aprender:</span> <p class="text-neutral-300 text-sm">Estas protecciones son las que hacen que el briefing sea confiable: son la "promesa cumplida" del método.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceptos clave:</span> <p class="text-neutral-300 text-sm">Investigación real · rebajar · verificación obligatoria.</p></div>
+</div></div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-2-1')">Ver en modal</button>
+<a class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors" href="modulo-2-1.html">Ver completo</a>
+</div>
+</div>
+<!-- MÓDULO 2.2 -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" id="modulo-2-2">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.2</span><span class="text-xs text-neutral-500">~30 min</span></div>
+<h3 class="text-2xl font-bold mb-2">⬇️ Instalar la skill</h3>
+<p class="text-neutral-400 text-sm">Descarga la skill, suéltala en la carpeta correcta y confirma que Claude reconoce la skill — con los errores comunes que traban a quienes recién empiezan.</p>
+<div class="mt-3 max-w-xs"><div aria-label="Progreso del módulo 2.2" aria-valuemax="100" aria-valuemin="0" class="inema-meter" data-inema-meter="modulo:2-2" role="progressbar"><div class="inema-bar"><span class="inema-bar__fill"></span></div><span class="inema-meter-count text-xs text-neutral-500">0 de 6</span></div></div>
+</div>
+<div class="divide-y divide-dark-600">
+<div class="topic-item">
+<button aria-controls="t2-2-1" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">⬇️</span><div><span class="font-medium">Descargar los archivos</span><span class="text-neutral-500 text-sm ml-2">- SKILL.md + template (PT/EN)</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t2-2-1"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">Qué es:</span> <p class="text-neutral-300 text-sm">Los cuatro archivos para descargar: <code class="font-mono">SKILL.md</code> e <code class="font-mono">report-template.html</code>, en portugués e inglés.</p></div>
+<div><span class="text-blue-400 font-semibold">Por qué aprender:</span> <p class="text-neutral-300 text-sm">Es el punto de partida — sin los archivos no hay ninguna skill que instalar. Este módulo incluye los enlaces de descarga.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceptos clave:</span> <p class="text-neutral-300 text-sm">Descarga · PT/EN · skill + plantilla.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-controls="t2-2-2" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">📁</span><div><span class="font-medium">Dónde colocar</span><span class="text-neutral-500 text-sm ml-2">- .claude/skills/storm-research/</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t2-2-2"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">Qué es:</span> <p class="text-neutral-300 text-sm">Los dos archivos van juntos en <code class="font-mono">.claude/skills/storm-research/</code>, en tu proyecto o en tu página de inicio.</p></div>
+<div><span class="text-blue-400 font-semibold">Por qué aprender:</span> <p class="text-neutral-300 text-sm">La carpeta correcta es lo que permite que Claude Code encuentre y reconozca la skill.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceptos clave:</span> <p class="text-neutral-300 text-sm">.claude/skills · carpeta de la skill · archivos juntos.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-controls="t2-2-3" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">🔀</span><div><span class="font-medium">Otros agentes</span><span class="text-neutral-500 text-sm ml-2">- la misma skill en .codex / .agents</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t2-2-3"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">Qué es:</span> <p class="text-neutral-300 text-sm">La misma skill funciona en otros agentes (Codex y similares); solo cambia la carpeta: <code class="font-mono">.codex/</code> o <code class="font-mono">.agents/</code>.</p></div>
+<div><span class="text-blue-400 font-semibold">Por qué aprender:</span> <p class="text-neutral-300 text-sm">Muestra que la skill es portátil y que no estás atado a un único agente.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceptos clave:</span> <p class="text-neutral-300 text-sm">Portátil · .codex · .agents.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-controls="t2-2-4" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">✅</span><div><span class="font-medium">Verificar la instalación</span><span class="text-neutral-500 text-sm ml-2">- ¿la skill aparece en la lista?</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t2-2-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">Qué es:</span> <p class="text-neutral-300 text-sm">Un prompt simple para que Claude liste las skills y confirme que <code class="font-mono">storm-research</code> aparece.</p></div>
+<div><span class="text-blue-400 font-semibold">Por qué aprender:</span> <p class="text-neutral-300 text-sm">Confirma que la instalación se realizó correctamente antes de depender de ella.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceptos clave:</span> <p class="text-neutral-300 text-sm">Listar skills · reconocimiento · verificación.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-controls="t2-2-5" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">🎯</span><div><span class="font-medium">Dar contexto</span><span class="text-neutral-500 text-sm ml-2">- informes dirigidos a tu función</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t2-2-5"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">Qué es:</span> <p class="text-neutral-300 text-sm">Contarle a Claude quién eres y cuál es tu negocio para que los informes se enfoquen en tu función.</p></div>
+<div><span class="text-blue-400 font-semibold">Por qué aprender:</span> <p class="text-neutral-300 text-sm">El contexto hace que el insight accionable hable directamente de tu realidad, no de una persona genérica.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceptos clave:</span> <p class="text-neutral-300 text-sm">Contexto · lector objetivo · tailored.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-controls="t2-2-6" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">🧯</span><div><span class="font-medium">Errores comunes</span><span class="text-neutral-500 text-sm ml-2">- carpeta equivocada, falta la plantilla</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t2-2-6"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">Qué es:</span> <p class="text-neutral-300 text-sm">Los fallos típicos: carpeta equivocada, solo el <code class="font-mono">SKILL.md</code> sin la plantilla o los permisos de archivo.</p></div>
+<div><span class="text-blue-400 font-semibold">Por qué aprender:</span> <p class="text-neutral-300 text-sm">Conocer los errores comunes resuelve la mayoría de los casos de «no funcionó» en segundos.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceptos clave:</span> <p class="text-neutral-300 text-sm">Carpeta incorrecta · falta la plantilla · permisos.</p></div>
+</div></div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-2-2')">Ver en modal</button>
+<a class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors" href="modulo-2-2.html">Ver completo</a>
+</div>
+</div>
+<!-- MÓDULO 2.3 -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" id="modulo-2-3">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.3</span><span class="text-xs text-neutral-500">~40 min</span></div>
+<h3 class="text-2xl font-bold mb-2">⚙️ El pipeline en 4 fases</h3>
+<p class="text-neutral-400 text-sm">Del alcance a la entrega: las fases que convierten un tema en un briefing verificado — alcance, cinco perspectivas, mapa de contradicciones, síntesis y verificación.</p>
+<div class="mt-3 max-w-xs"><div aria-label="Progreso del módulo 2.3" aria-valuemax="100" aria-valuemin="0" class="inema-meter" data-inema-meter="modulo:2-3" role="progressbar"><div class="inema-bar"><span class="inema-bar__fill"></span></div><span class="inema-meter-count text-xs text-neutral-500">0 de 6</span></div></div>
+</div>
+<div class="divide-y divide-dark-600">
+<div class="topic-item">
+<button aria-controls="t2-3-1" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">🎯</span><div><span class="font-medium">Fase 0 — Alcance</span><span class="text-neutral-500 text-sm ml-2">- interpretar el tema y al lector</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t2-3-1"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">Qué es:</span> <p class="text-neutral-300 text-sm">Claude lee el tema, lo resume en una línea, identifica al lector objetivo y deriva un <code class="font-mono">topic-slug</code>.</p></div>
+<div><span class="text-blue-400 font-semibold">Por qué aprender:</span> <p class="text-neutral-300 text-sm">Un buen alcance apunta a la sección práctica para el lector adecuado y nombra el archivo final.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceptos clave:</span> <p class="text-neutral-300 text-sm">Interpretación · lector objetivo · topic-slug.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-controls="t2-3-2" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">🔭</span><div><span class="font-medium">Fase 1 — Cinco perspectivas en paralelo</span><span class="text-neutral-500 text-sm ml-2">- 5 agentes, un mensaje</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t2-3-2"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">Qué es:</span> <p class="text-neutral-300 text-sm">Cinco agentes de propósito general activados en un solo mensaje, cada uno con el mismo marco y su perspectiva, en menos de 400 palabras.</p></div>
+<div><span class="text-blue-400 font-semibold">Por qué aprender:</span> <p class="text-neutral-300 text-sm">Es el corazón multiperspectiva — y ejecutarlo en paralelo es lo que hace viable el panel.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceptos clave:</span> <p class="text-neutral-300 text-sm">Paralelo · general-purpose · marco compartido.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-controls="t2-3-3" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">🗺️</span><div><span class="font-medium">Fase 2 — Mapa de contradicciones</span><span class="text-neutral-500 text-sm ml-2">- interno, sin agentes</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t2-3-3"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">Qué es:</span> <p class="text-neutral-300 text-sm">Claude cruza los cinco briefings y señala los conflictos directos, la evidencia sólida frente a la débil, el acuerdo universal y el punto ciego.</p></div>
+<div><span class="text-blue-400 font-semibold">Por qué aprender:</span> <p class="text-neutral-300 text-sm">Es la materia prima de los hallazgos y de las etiquetas "apoya/desafía" del informe.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceptos clave:</span> <p class="text-neutral-300 text-sm">Conflicto directo · acuerdo universal · punto ciego.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-controls="t2-3-4" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">🧱</span><div><span class="font-medium">Fase 3 — Sintetizar el HTML</span><span class="text-neutral-500 text-sm ml-2">- clonar el template y completar</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t2-3-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">Qué es:</span> <p class="text-neutral-300 text-sm">Clonar <code class="font-mono">report-template.html</code> y completar el resumen, 5 hallazgos, la conexión oculta, la 6.ª lente, el insight, el límite y las referencias.</p></div>
+<div><span class="text-blue-400 font-semibold">Por qué aprender:</span> <p class="text-neutral-300 text-sm">Es donde la investigación se convierte en un informe legible, guardado en <code class="font-mono">storm-reports/</code>.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceptos clave:</span> <p class="text-neutral-300 text-sm">Clonar plantilla · secciones · storm-reports.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-controls="t2-3-5" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">✅</span><div><span class="font-medium">Fase 4 — Revisión + verificación</span><span class="text-neutral-500 text-sm ml-2">- nunca saltar</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t2-3-5"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">Qué es:</span> <p class="text-neutral-300 text-sm">Autoevaluación (puntuaciones del 1 al 10, eslabón más débil, sesgo, 6.ª perspectiva) más ~4 a 6 verificadores en paralelo que revisan cada cita.</p></div>
+<div><span class="text-blue-400 font-semibold">Por qué aprender:</span> <p class="text-neutral-300 text-sm">Es lo que distingue a STORM de un informe común; sin ella, el briefing no es confiable.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceptos clave:</span> <p class="text-neutral-300 text-sm">Adversarial · verificación · banner.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-controls="t2-3-6" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">📤</span><div><span class="font-medium">El resultado final</span><span class="text-neutral-500 text-sm ml-2">- el briefing verificado v2</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t2-3-6"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">Qué es:</span> <p class="text-neutral-300 text-sm">La entrega posterior a la verificación: el HTML v2, abierto con <code class="font-mono">xdg-open</code>, más un resumen en el chat (marcador, hallazgo universal, frontera).</p></div>
+<div><span class="text-blue-400 font-semibold">Por qué aprender:</span> <p class="text-neutral-300 text-sm">Saber qué esperar del resultado te ayuda a evaluar la calidad de lo que recibiste.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceptos clave:</span> <p class="text-neutral-300 text-sm">v2 · marcador · hallazgo universal.</p></div>
+</div></div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-2-3')">Ver en modal</button>
+<a class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors" href="modulo-2-3.html">Ver completo</a>
+</div>
+</div>
+<!-- MÓDULO 2.4 -->
+<div class="bg-dark-800 rounded-xl border border-dark-600 mb-6" id="modulo-2-4">
+<div class="p-6 border-b border-dark-600">
+<div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.4</span><span class="text-xs text-neutral-500">~35 min</span></div>
+<h3 class="text-2xl font-bold mb-2">🧭 Tu primer informe</h3>
+<p class="text-neutral-400 text-sm">En la práctica: elegir un buen tema, iniciar el pipeline, seguir las lentes, abrir el HTML e iterar hasta obtener una versión mejor.</p>
+<div class="mt-3 max-w-xs"><div aria-label="Progreso del módulo 2.4" aria-valuemax="100" aria-valuemin="0" class="inema-meter" data-inema-meter="modulo:2-4" role="progressbar"><div class="inema-bar"><span class="inema-bar__fill"></span></div><span class="inema-meter-count text-xs text-neutral-500">0 de 6</span></div></div>
+</div>
+<div class="divide-y divide-dark-600">
+<div class="topic-item">
+<button aria-controls="t2-4-1" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+<span class="text-lg">🧭</span><div><span class="font-medium">Elegir un buen tema</span><span class="text-neutral-500 text-sm ml-2">- multiperspectiva y verificable</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t2-4-1"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">Qué es:</span> <p class="text-neutral-300 text-sm">Un buen tema tiene múltiples puntos de vista y afirmaciones que se pueden comprobar; no es una consulta factual simple.</p></div>
+<div><span class="text-blue-400 font-semibold">Por qué aprender:</span> <p class="text-neutral-300 text-sm">Elegir el tema correcto es la mitad del resultado; un tema superficial desperdicia todo el panel.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceptos clave:</span> <p class="text-neutral-300 text-sm">Cuestionado · verificable · adecuación.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-controls="t2-4-2" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+<span class="text-lg">▶️</span><div><span class="font-medium">El prompt para iniciar</span><span class="text-neutral-500 text-sm ml-2">- objetivo + bloque para copiar</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t2-4-2"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">Qué es:</span> <p class="text-neutral-300 text-sm">Un comando simple: «Ejecuta un Storm Research sobre <code class="font-mono">&lt;seu tópico&gt;</code>. El lector es <code class="font-mono">&lt;seu papel&gt;</code>." — con las partes variables marcadas.</p></div>
+<div><span class="text-blue-400 font-semibold">Por qué aprender:</span> <p class="text-neutral-300 text-sm">Es el disparador real; saber completarlo es lo que pone el pipeline en marcha.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceptos clave:</span> <p class="text-neutral-300 text-sm">Prompt · variables · lector objetivo.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-controls="t2-4-3" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+<span class="text-lg">👀</span><div><span class="font-medium">Seguir las 5 lentes</span><span class="text-neutral-500 text-sm ml-2">- 5 subagentes buscando en la web</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t2-4-3"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">Qué es:</span> <p class="text-neutral-300 text-sm">Durante la Fase 1 ves 5 subagentes ejecutándose en paralelo; puedes hacer clic y ver el prompt de cada uno.</p></div>
+<div><span class="text-blue-400 font-semibold">Por qué aprender:</span> <p class="text-neutral-300 text-sm">Seguirlas muestra que la investigación es real y ayuda a confiar en el resultado.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceptos clave:</span> <p class="text-neutral-300 text-sm">Subagentes · paralelo · transparencia.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-controls="t2-4-4" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+<span class="text-lg">💬</span><div><span class="font-medium">La nota de convergencia</span><span class="text-neutral-500 text-sm ml-2">- 2–3 líneas, no los briefings sin procesar</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t2-4-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">Qué es:</span> <p class="text-neutral-300 text-sm">Al final de la Fase 1, Claude publica de 2 a 3 líneas que indican dónde convergen las lentes y cuál es la divergencia más marcada.</p></div>
+<div><span class="text-blue-400 font-semibold">Por qué aprender:</span> <p class="text-neutral-300 text-sm">Es un resumen honesto del panel — no un volcado de los briefings sin procesar en el chat.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceptos clave:</span> <p class="text-neutral-300 text-sm">Convergencia · divergencia · síntesis.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-controls="t2-4-5" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+<span class="text-lg">🖥️</span><div><span class="font-medium">Abrir el HTML</span><span class="text-neutral-500 text-sm ml-2">- xdg-open / open / start</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t2-4-5"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">Qué es:</span> <p class="text-neutral-300 text-sm">El informe queda en <code class="font-mono">storm-reports/&lt;slug&gt;-briefing.html</code>; ábrelo con <code class="font-mono">xdg-open</code> (Linux), <code class="font-mono">open</code> (macOS) o <code class="font-mono">start ""</code> (Windows).</p></div>
+<div><span class="text-blue-400 font-semibold">Por qué aprender:</span> <p class="text-neutral-300 text-sm">Saber cómo abrir el archivo es el último paso para leer tu informe.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceptos clave:</span> <p class="text-neutral-300 text-sm">xdg-open · ruta · briefing HTML.</p></div>
+</div></div>
+</div>
+<div class="topic-item">
+<button aria-controls="t2-4-6" aria-expanded="false" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left" onclick="toggleTopic(this)">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+<span class="text-lg">🔁</span><div><span class="font-medium">Pedir V2 / V3</span><span class="text-neutral-500 text-sm ml-2">- iterar es parte del método</span></div>
+</button>
+<div class="topic-explanation px-6 pb-4" id="t2-4-6"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+<div><span class="text-blue-400 font-semibold">Qué es:</span> <p class="text-neutral-300 text-sm">Puedes pedir una nueva versión; por ejemplo: "ejecuta la 6.ª lente que falta y genera una V3".</p></div>
+<div><span class="text-blue-400 font-semibold">Por qué aprender:</span> <p class="text-neutral-300 text-sm">Iterar refina el informe y explora ángulos que la primera pasada dejó fuera.</p></div>
+<div><span class="text-blue-400 font-semibold">Conceptos clave:</span> <p class="text-neutral-300 text-sm">Iteración · 6.ª lente · V2/V3.</p></div>
+</div></div>
+</div>
+</div>
+<div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+<button class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors" onclick="openModal('modal-2-4')">Ver en modal</button>
+<a class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors" href="modulo-2-4.html">Ver completo</a>
+</div>
+</div>
+<!-- NAV PRÓXIMA TRILHA -->
+<div class="flex flex-col sm:flex-row gap-4 mt-10">
+<a class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors" href="../trilha1/index.html">← Trilha 1: Fundamentos</a>
+<a class="flex-1 text-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-500 transition-colors" href="../trilha3/index.html">Trilha 3: Avanzado →</a>
+</div>
+</main>
+<!-- MODAIS -->
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-2-1" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.1</span><span class="font-semibold">Anatomía de la skill storm-research</span></div><button class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button></div>
+<iframe class="flex-1 w-full rounded-b-xl" data-src="modulo-2-1.html" title="Módulo 2.1"></iframe>
+</div>
+</div>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-2-2" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.2</span><span class="font-semibold">Instalar la skill</span></div><button class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button></div>
+<iframe class="flex-1 w-full rounded-b-xl" data-src="modulo-2-2.html" title="Módulo 2.2"></iframe>
+</div>
+</div>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-2-3" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.3</span><span class="font-semibold">El pipeline en 4 fases</span></div><button class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button></div>
+<iframe class="flex-1 w-full rounded-b-xl" data-src="modulo-2-3.html" title="Módulo 2.3"></iframe>
+</div>
+</div>
+<div class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" id="modal-2-4" onclick="if(event.target === this) closeModal()">
+<div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+<div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0"><div class="flex items-center space-x-3"><span class="text-blue-400 font-bold">2.4</span><span class="font-semibold">Tu primer informe</span></div><button class="text-neutral-400 hover:text-white text-2xl leading-none" onclick="closeModal()">×</button></div>
+<iframe class="flex-1 w-full rounded-b-xl" data-src="modulo-2-4.html" title="Módulo 2.4"></iframe>
+</div>
+</div>
+<footer class="border-t border-dark-600 py-8 mt-8">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>STORM Research · Curso INEMA · 2026 · <a class="text-sky-400 hover:text-sky-300" href="https://inema.club" target="_blank">INEMA.CLUB</a></p></div>
+</footer>
+<script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800') || document;
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => { if (exp !== explanation) { exp.classList.remove('active'); const b = exp.closest('.topic-item').querySelector('button'); if (b) b.setAttribute('aria-expanded','false'); } });
+      const open = explanation.classList.toggle('active');
+      button.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    (function () {
+      const themeToggle = document.getElementById('theme-toggle');
+      const darkIcon = document.getElementById('theme-toggle-dark-icon');
+      const lightIcon = document.getElementById('theme-toggle-light-icon');
+      const html = document.documentElement;
+      function sync(){ if (html.classList.contains('dark')) { darkIcon.classList.add('hidden'); lightIcon.classList.remove('hidden'); } else { lightIcon.classList.add('hidden'); darkIcon.classList.remove('hidden'); } }
+      sync();
+      themeToggle && themeToggle.addEventListener('click', () => {
+        html.classList.toggle('dark'); const isDark = html.classList.contains('dark'); html.style.colorScheme = isDark ? 'dark' : 'light';
+        try { var p = JSON.parse(localStorage.getItem('inema.prefs')||'{}'); p.theme = isDark ? 'inema-dark' : 'claro'; localStorage.setItem('inema.prefs', JSON.stringify(p)); localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch(e){}
+        sync(); if (window.INEMA && INEMA.applyPrefs) try { INEMA.applyPrefs(); } catch(e){}
+      });
+    })();
+    function openModal(id){ const m=document.getElementById(id); if(m){ const f=m.querySelector('iframe[data-src]'); if(f && !f.src) f.src=f.getAttribute('data-src'); m.classList.remove('hidden'); document.body.style.overflow='hidden'; } }
+    function closeModal(){ document.querySelectorAll('.modal').forEach(m=>m.classList.add('hidden')); document.body.style.overflow='auto'; }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  </script>
+<script src="../../../assets/learn.js"></script>
+<script>if (window.INEMA && typeof window.INEMA.init === 'function') window.INEMA.init();</script>
+</body>
+</html>
