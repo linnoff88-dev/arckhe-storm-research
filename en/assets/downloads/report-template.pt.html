@@ -2,10 +2,10 @@
 
 <!--
   TEMPLATE DE RELATÓRIO STORM RESEARCH
-  Clone este arquivo, preencha todos os {{TOKEN}}, apague os comentários de instrução, repita os
+  Clone este arquivo, preencha todos os {{TOKEN}}, apague os comentários de instruçêo, repita os
   blocos repetidos (cards de achados, referências, ações) quantas vezes forem necessárias.
   Mantenha o bloco <style> exatamente igual. Design = branco limpo e profissional:
-  Títulos em Montserrat, rótulos em Roboto Mono, destaque azul. NÃO troque para estilo desenhado à mão.
+  Títulos em Montserrat, rótulos em Roboto Mono, destaque azul. NêO troque para estilo desenhado à mêo.
 -->
 <html lang="en">
 <head>
@@ -156,7 +156,7 @@
 <section class="section">
 <div class="section-num">02</div>
 <h2><span class="bar"></span>Five main findings, ranked by reliability</h2>
-<!-- REPITA este bloco .finding 5x. Classe rel: high | medhigh | medium | low. Pontuação 1-10. -->
+<!-- REPITA este bloco .finding 5x. Classe rel: high | medhigh | medium | low. Pontuaçêo 1-10. -->
 <div class="finding">
 <div class="finding-head">
 <div class="finding-title">{{FINDING_TITLE}}</div>
@@ -170,11 +170,11 @@
 <div class="chips">
 <div class="chip-row"><span class="chip-label sup">Powered by</span><span class="who">{{WHICH LENSES + actual study/source}}</span></div>
 <div class="chip-row"><span class="chip-label chal">Challenged by</span><span class="who">{{WHICH LENSES disagree, or "No one"}}</span></div>
-<!-- adicione um chip 'fix' quando a verificação forçar uma correção -->
+<!-- adicione um chip 'fix' quando a verificaçêo forçar uma correçêo -->
 <div class="chip-row"><span class="chip-label fix">Corrected</span><span class="who">{{what changed after checking the primary source; delete if nothing changed}}</span></div>
 </div>
 </div>
-<!-- Barra lateral de afirmações CONTESTADAS / REBAIXADAS. Use para qualquer afirmação marcada como contestada ou preprint na verificação. Apague se não houver. -->
+<!-- Barra lateral de afirmações CONTESTADAS / REBAIXADAS. Use para qualquer afirmaçêo marcada como contestada ou preprint na verificaçêo. Apague se nêo houver. -->
 <div class="contested">
 <div class="tag">Contested signal · monitor, don’t assert · confidence {{SCORE}}/10</div>
 <h4>{{CLAIM_TITLE}}</h4>
@@ -204,7 +204,7 @@
 <div class="section-num">04</div>
 <h2><span class="bar"></span>What to do differently in practice</h2>
 <p class="body-lg" style="color:var(--muted);">{{Who this is for + framing: specific moves, not principles.}}</p>
-<!-- REPITA 3 a 6 itens de ação -->
+<!-- REPITA 3 a 6 itens de açêo -->
 <div class="action-item">
 <div class="action-mark">{{NN}}</div>
 <div><span class="do">{{The action in one sentence.}}</span><p>{{Why + exactly how to do it, tied to a finding.}}</p></div>
@@ -242,7 +242,7 @@
 <div class="refs">
 <h3>Evidence base · verification status</h3>
 <ul>
-<!-- REPITA por citação. Classe vstat: ok (confirmado) | part (corrigido/parcial) | weak (rebaixado/preprint/contestado). -->
+<!-- REPITA por citaçêo. Classe vstat: ok (confirmado) | part (corrigido/parcial) | weak (rebaixado/preprint/contestado). -->
 <li><span class="vstat {{ok|part|weak}}">{{Confirmed|Corrected|Contested|Demoted}}</span> {{Full citation: authors, year, title, publication, main finding, and any limitation found during verification.}} <a href="{{PRIMARY_URL}}">{{domain}}</a></li>
 </ul>
 </div>

@@ -2,10 +2,10 @@
 
 <!--
   TEMPLATE DE RELATÓRIO STORM RESEARCH
-  Clone este arquivo, preencha todos os {{TOKEN}}, apague os comentários de instrução, repita os
+  Clone este arquivo, preencha todos os {{TOKEN}}, apague os comentários de instruçêo, repita os
   blocos repetidos (cards de achados, referências, ações) quantas vezes forem necessárias.
   Mantenha o bloco <style> exatamente igual. Design = branco limpo e profissional:
-  Títulos em Montserrat, rótulos em Roboto Mono, destaque azul. NÃO troque para estilo desenhado à mão.
+  Títulos em Montserrat, rótulos em Roboto Mono, destaque azul. NêO troque para estilo desenhado à mêo.
 -->
 <html lang="pt-BR">
 <head>
@@ -125,22 +125,22 @@
 <header>
 <div class="eyebrow">Storm Research · v2 (verificado)</div>
 <h1>{{TOPIC_TITLE}}</h1>
-<p class="lede">Uma síntese em cinco lentes: profissional prático, acadêmico, cético, economista e historiador. Cada afirmação é checada de forma independente contra sua fonte primária antes da publicação.</p>
+<p class="lede">Uma síntese em cinco lentes: profissional prático, acadêmico, cético, economista e historiador. Cada afirmaçêo é checada de forma independente contra sua fonte primária antes da publicaçêo.</p>
 <div class="meta-row">
 <span><b>Data</b>  {{DATE}}</span>
 <span><b>Método</b>  5 lentes especialistas construídas pelo autor + mapa de contradições</span>
-<span><b>Público</b>  {{AUDIENCE: papel do leitor; omita este span se não houver público definido}}</span>
+<span><b>Público</b>  {{AUDIENCE: papel do leitor; omita este span se nêo houver público definido}}</span>
 </div>
 <div class="verify-banner">
 <span class="tag">Verificado</span>
-<span>Todas as {{N}} citações foram checadas de forma independente contra fontes primárias em {{DATE}}. <b>Resultado: {{X}} fabricadas, {{Y}} corrigidas, {{Z}} rebaixadas.</b> As pontuações de confiança refletem a qualidade da evidência após a verificação.</span>
+<span>Todas as {{N}} citações foram checadas de forma independente contra fontes primárias em {{DATE}}. <b>Resultado: {{X}} fabricadas, {{Y}} corrigidas, {{Z}} rebaixadas.</b> As pontuações de confiança refletem a qualidade da evidência após a verificaçêo.</span>
 </div>
 <div class="howto">
 <h4>Como ler este relatório</h4>
 <ul>
-<li><b>O painel foi construído pelo autor.</b> As cinco lentes compartilham o mesmo enquadramento; portanto, onde elas concordam, trate isso como uma hipótese forte, não como prova independente.</li>
+<li><b>O painel foi construído pelo autor.</b> As cinco lentes compartilham o mesmo enquadramento; portanto, onde elas concordam, trate isso como uma hipótese forte, nêo como prova independente.</li>
 <li><b>A confiança é pontuada de 1 a 10</b> com base na qualidade da evidência: estudo causal revisado por pares &gt; dados oficiais/políticos/financeiros &gt; pesquisa única comissionada &gt; analogia &gt; preprint.</li>
-<li><b>Fato medido e interpretação são sinalizados separadamente.</b> Uma pontuação alta significa que os dados são sólidos, não que a leitura estratégica seja certa.</li>
+<li><b>Fato medido e interpretaçêo sêo sinalizados separadamente.</b> Uma pontuaçêo alta significa que os dados sêo sólidos, nêo que a leitura estratégica seja certa.</li>
 </ul>
 </div>
 </header>
@@ -149,14 +149,14 @@
 <div class="section-num">01</div>
 <h2><span class="bar"></span>Resumo de 60 segundos</h2>
 <div class="ceo">
-<p style="margin-bottom:0;">{{CEO_SUMMARY: um parágrafo denso para um decisor com 60 segundos. Comece pelo fato estabelecido, depois apresente a interpretação contestada e então a tensão. Coloque em negrito a frase mais importante. Nuance, não manchete.}}</p>
+<p style="margin-bottom:0;">{{CEO_SUMMARY: um parágrafo denso para um decisor com 60 segundos. Comece pelo fato estabelecido, depois apresente a interpretaçêo contestada e entêo a tensêo. Coloque em negrito a frase mais importante. Nuance, nêo manchete.}}</p>
 </div>
 </section>
 <!-- ============ 02 KEY FINDINGS (ranked by reliability, highest first) ============ -->
 <section class="section">
 <div class="section-num">02</div>
 <h2><span class="bar"></span>Cinco achados principais, classificados por confiabilidade</h2>
-<!-- REPITA este bloco .finding 5x. Classe rel: high | medhigh | medium | low. Pontuação 1-10. -->
+<!-- REPITA este bloco .finding 5x. Classe rel: high | medhigh | medium | low. Pontuaçêo 1-10. -->
 <div class="finding">
 <div class="finding-head">
 <div class="finding-title">{{TITULO_DO_ACHADO}}</div>
@@ -166,48 +166,48 @@
 <div class="rel {{RELCLASS}}">Confiabilidade: {{ROTULO_DE_CONFIABILIDADE}}</div>
 <div class="score"><b>{{SCORE}}</b><span>/10</span></div>
 </div>
-<p>{{CORPO_DO_ACHADO: o que afirma, a evidência e a ressalva verificada que limita a pontuação. Coloque em negrito qualquer correção feita durante a verificação.}}</p>
+<p>{{CORPO_DO_ACHADO: o que afirma, a evidência e a ressalva verificada que limita a pontuaçêo. Coloque em negrito qualquer correçêo feita durante a verificaçêo.}}</p>
 <div class="chips">
 <div class="chip-row"><span class="chip-label sup">Apoiado por</span><span class="who">{{QUAIS LENTES + estudo/fonte real}}</span></div>
 <div class="chip-row"><span class="chip-label chal">Desafiado por</span><span class="who">{{QUAIS LENTES discordam, ou "Ninguém"}}</span></div>
-<!-- adicione um chip 'fix' quando a verificação forçar uma correção -->
+<!-- adicione um chip 'fix' quando a verificaçêo forçar uma correçêo -->
 <div class="chip-row"><span class="chip-label fix">Corrigido</span><span class="who">{{o que mudou após a checagem da fonte primária; apague se nada mudou}}</span></div>
 </div>
 </div>
-<!-- Barra lateral de afirmações CONTESTADAS / REBAIXADAS. Use para qualquer afirmação marcada como contestada ou preprint na verificação. Apague se não houver. -->
+<!-- Barra lateral de afirmações CONTESTADAS / REBAIXADAS. Use para qualquer afirmaçêo marcada como contestada ou preprint na verificaçêo. Apague se nêo houver. -->
 <div class="contested">
-<div class="tag">Sinal contestado · monitore, não afirme · confiança {{SCORE}}/10</div>
+<div class="tag">Sinal contestado · monitore, nêo afirme · confiança {{SCORE}}/10</div>
 <h4>{{TITULO_DA_AFIRMACAO}}</h4>
-<p>{{Por que é contestado: a crítica, a contraevidência e a fonte. Oriente o leitor a não declarar isso como fato.}}</p>
+<p>{{Por que é contestado: a crítica, a contraevidência e a fonte. Oriente o leitor a nêo declarar isso como fato.}}</p>
 </div>
 </section>
 <!-- ============ 03 HIDDEN CONNECTION ============ -->
 <section class="section">
 <div class="connection">
 <div class="section-num">03</div>
-<h2><span class="bar"></span>A conexão oculta</h2>
-<p>{{Apresente a contradição aparente entre dois achados.}}</p>
-<p>{{Resolva: o elo não óbvio que só aparece ao cruzar as cinco lentes.}}</p>
-<p class="punch">{{A conclusão de impacto em uma frase. Se depender de um achado fraco, diga isso entre parênteses.}}</p>
+<h2><span class="bar"></span>A conexêo oculta</h2>
+<p>{{Apresente a contradiçêo aparente entre dois achados.}}</p>
+<p>{{Resolva: o elo nêo óbvio que só aparece ao cruzar as cinco lentes.}}</p>
+<p class="punch">{{A conclusêo de impacto em uma frase. Se depender de um achado fraco, diga isso entre parênteses.}}</p>
 </div>
 </section>
 <!-- ============ 03b KEY ASSUMPTION / MISSING 6TH LENS ============ -->
 <section class="section">
 <div class="assume">
-<h3>A suposição em que este briefing se apoia (e a 6ª lente ausente)</h3>
-<p>{{Quais variáveis as cinco lentes congelaram. Nomeie a 6ª perspectiva que mudaria as conclusões, não apenas acrescentaria nuance.}}</p>
-<p>{{A omissão que poderia inverter os achados. Construa levando essa ressalva em conta.}}</p>
+<h3>A suposiçêo em que este briefing se apoia (e a 6ª lente ausente)</h3>
+<p>{{Quais variáveis as cinco lentes congelaram. Nomeie a 6ª perspectiva que mudaria as conclusões, nêo apenas acrescentaria nuance.}}</p>
+<p>{{A omissêo que poderia inverter os achados. Construa levando essa ressalva em conta.}}</p>
 </div>
 </section>
 <!-- ============ 04 ACTIONABLE INSIGHT ============ -->
 <section class="section">
 <div class="section-num">04</div>
 <h2><span class="bar"></span>O que fazer de forma diferente na prática</h2>
-<p class="body-lg" style="color:var(--muted);">{{Para quem isto é + enquadramento: movimentos específicos, não princípios.}}</p>
-<!-- REPITA 3 a 6 itens de ação -->
+<p class="body-lg" style="color:var(--muted);">{{Para quem isto é + enquadramento: movimentos específicos, nêo princípios.}}</p>
+<!-- REPITA 3 a 6 itens de açêo -->
 <div class="action-item">
 <div class="action-mark">{{NN}}</div>
-<div><span class="do">{{A ação em uma frase.}}</span><p>{{Por quê + exatamente como fazer, ligado a um achado.}}</p></div>
+<div><span class="do">{{A açêo em uma frase.}}</span><p>{{Por quê + exatamente como fazer, ligado a um achado.}}</p></div>
 </div>
 </section>
 <!-- ============ 04b CLAIM SAFETY GUIDE (assert / caveat / avoid) ============ -->
@@ -221,11 +221,11 @@
 </div>
 <div class="oncam-col caveat">
 <h4>⚠ Diga com ressalva</h4>
-<ul><li>{{Afirmações que precisam de atribuição ou qualificação.}}</li></ul>
+<ul><li>{{Afirmações que precisam de atribuiçêo ou qualificaçêo.}}</li></ul>
 </div>
 <div class="oncam-col avoid">
-<h4>✕ Não afirme</h4>
-<ul><li>{{Afirmações contestadas, preprints ou não verificáveis. Nomeie-as para que não voltem ao texto.}}</li></ul>
+<h4>✕ Nêo afirme</h4>
+<ul><li>{{Afirmações contestadas, preprints ou nêo verificáveis. Nomeie-as para que nêo voltem ao texto.}}</li></ul>
 </div>
 </div>
 </section>
@@ -240,13 +240,13 @@
 </section>
 <!-- ============ REFERENCES with verification status ============ -->
 <div class="refs">
-<h3>Base de evidências · status de verificação</h3>
+<h3>Base de evidências · status de verificaçêo</h3>
 <ul>
-<!-- REPITA por citação. Classe vstat: ok (confirmado) | part (corrigido/parcial) | weak (rebaixado/preprint/contestado). -->
-<li><span class="vstat {{ok|part|weak}}">{{Confirmed|Corrigido|Contested|Demoted}}</span> {{Citação completa: autores, ano, título, veículo, dado principal e qualquer limitação encontrada durante a verificação.}} <a href="{{PRIMARY_URL}}">{{domain}}</a></li>
+<!-- REPITA por citaçêo. Classe vstat: ok (confirmado) | part (corrigido/parcial) | weak (rebaixado/preprint/contestado). -->
+<li><span class="vstat {{ok|part|weak}}">{{Confirmed|Corrigido|Contested|Demoted}}</span> {{Citaçêo completa: autores, ano, título, veículo, dado principal e qualquer limitaçêo encontrada durante a verificaçêo.}} <a href="{{PRIMARY_URL}}">{{domain}}</a></li>
 </ul>
 </div>
-<div class="footer">Storm Research v2 · {{N}}/{{N}} citações verificadas de forma independente contra fontes primárias, {{DATE}} · {{X}} fabricadas, {{Y}} corrigidas, {{Z}} rebaixadas · Confiabilidade = qualidade da evidência, não confiança do autor</div>
+<div class="footer">Storm Research v2 · {{N}}/{{N}} citações verificadas de forma independente contra fontes primárias, {{DATE}} · {{X}} fabricadas, {{Y}} corrigidas, {{Z}} rebaixadas · Confiabilidade = qualidade da evidência, nêo confiança do autor</div>
 </div>
 </body>
 </html>

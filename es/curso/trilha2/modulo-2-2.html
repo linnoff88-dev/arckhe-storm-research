@@ -382,7 +382,7 @@
 <div class="bg-dark-900 rounded-xl border border-dark-600 p-5 mb-3">
 <div class="flex items-center justify-between mb-3"><span class="text-xs font-mono text-neutral-500">pega en Claude Code</span><span class="text-xs text-neutral-500">prompt</span></div>
 <pre class="font-mono text-sm text-neutral-300 overflow-x-auto leading-relaxed">Liste as skills disponíveis e confirme que "storm-research"
-aparece. Mostre a descrição dela.</pre>
+aparece. Mostre a descriçêo dela.</pre>
 </div>
 <div class="bg-dark-800 rounded-lg border border-dark-600 p-4 mb-6">
 <p class="text-sm text-neutral-300"><strong class="text-neutral-100">✅ Cómo verificar:</strong> Claude responde enumerando las skills y cita <code class="font-mono text-blue-400">storm-research</code> — por lo general repitiendo la <code class="font-mono">description</code> del frontmatter (algo como «ejecutar Storm Research / briefing en HTML con múltiples perspectivas»). Si la skill <strong>no</strong> aparece, revisa la carpeta y los nombres de los archivos (tema 6) y reinicia la sesión.</p>
@@ -409,7 +409,7 @@ aparece. Mostre a descrição dela.</pre>
 <p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m2-2-t5-p1">STORM apunta a la <strong class="text-neutral-100">sección práctica</strong> — el «insight accionable» — en el <strong class="text-blue-400">lector objetivo</strong> que identifica en la Fase 0. Si no dices nada, asume "un profesional o responsable de tomar decisiones en el área". Pero, si cuentas quién eres y cuál es tu negocio, cada informe se adapta a tu función, en lugar de dirigirse a una persona genérica.</p>
 <div class="bg-dark-900 rounded-xl border border-dark-600 p-5 mb-6">
 <div class="flex items-center justify-between mb-3"><span class="text-xs font-mono text-neutral-500">ejemplo de línea de contexto</span><span class="text-xs text-neutral-500">pega antes de ejecutar</span></div>
-<pre class="font-mono text-sm text-neutral-300 overflow-x-auto leading-relaxed">Sou <span class="text-yellow-400">&lt;fundador de uma agência de automação em n8n&gt;</span>.
+<pre class="font-mono text-sm text-neutral-300 overflow-x-auto leading-relaxed">Sou <span class="text-yellow-400">&lt;fundador de uma agência de automaçêo em n8n&gt;</span>.
 Quando rodar storm-research, mire o insight acionável
 no meu papel: <span class="text-yellow-400">&lt;o que eu preciso decidir&gt;</span>.</pre>
 </div>
@@ -516,9 +516,9 @@ no meu papel: <span class="text-yellow-400">&lt;o que eu preciso decidir&gt;</sp
         INEMA.registerCheck('modulo-2-2#q1', {
           answer: 1,
           explain: {
-            0: 'Não: os dois arquivos ficam JUNTOS na mesma pasta da skill, não separados.',
-            1: 'Isso: ambos vão para ~/.claude/skills/storm-research/ — SKILL.md e report-template.html lado a lado.',
-            2: 'Não: o agente só varre pastas dentro de .claude/skills/<nome>/; fora dali ele não encontra a skill.'
+            0: 'Nêo: os dois arquivos ficam JUNTOS na mesma pasta da skill, nêo separados.',
+            1: 'Isso: ambos vêo para ~/.claude/skills/storm-research/ — SKILL.md e report-template.html lado a lado.',
+            2: 'Nêo: o agente só varre pastas dentro de .claude/skills/<nome>/; fora dali ele nêo encontra a skill.'
           }
         });
       }
