@@ -4,28 +4,28 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta content="storm-research" name="inema-course"/>
+<meta content="storm-research" name="ARCKHÉ-course"/>
 <meta content="Módulo 3.3 — Customizar e estender o STORM: adicionar uma 6ª lente no molde exato dos prompts, mirar no leitor, editar o template com segurança, escolher modelo por subagente e levar os princípios a outros fluxos." name="description"/>
 <script>
   (function () {
     try {
       var html = document.documentElement;
-      var DEF = { theme: 'inema-dark', font: 'inter', fontScale: 100, lineWidth: 68, leading: 1.7, accent: 'emerald' };
+      var DEF = { theme: 'ARCKHÉ-dark', font: 'inter', fontScale: 100, lineWidth: 68, leading: 1.7, accent: 'emerald' };
       function clone(o){var r={};for(var x in o)r[x]=o[x];return r;}
       var p = clone(DEF);
       try {
-        var raw = localStorage.getItem('inema.prefs');
+        var raw = localStorage.getItem('ARCKHÉ.prefs');
         if (raw) { var parsed = JSON.parse(raw); if (parsed && typeof parsed==='object'){ for (var k in DEF) if (parsed[k]!=null) p[k]=parsed[k]; } }
-        else { var legacy = localStorage.getItem('theme'); if (legacy==='light') p.theme='claro'; else if (legacy==='dark') p.theme='inema-dark'; }
+        else { var legacy = localStorage.getItem('theme'); if (legacy==='light') p.theme='claro'; else if (legacy==='dark') p.theme='ARCKHÉ-dark'; }
       } catch (e) { p = clone(DEF); }
-      var THEMES = { 'inema-dark':{dark:true,attr:null,cs:'dark'},'claro':{dark:false,attr:null,cs:'light'},'sepia':{dark:false,attr:'sepia',cs:'light'},'foco':{dark:null,attr:'foco',cs:null},'contraste':{dark:true,attr:'contraste',cs:'dark'} };
-      var t = THEMES[p.theme] || THEMES['inema-dark'];
+      var THEMES = { 'ARCKHÉ-dark':{dark:true,attr:null,cs:'dark'},'claro':{dark:false,attr:null,cs:'light'},'sepia':{dark:false,attr:'sepia',cs:'light'},'foco':{dark:null,attr:'foco',cs:null},'contraste':{dark:true,attr:'contraste',cs:'dark'} };
+      var t = THEMES[p.theme] || THEMES['ARCKHÉ-dark'];
       if (t.dark === true) html.classList.add('dark'); else if (t.dark === false) html.classList.remove('dark');
       if (t.attr) html.setAttribute('data-theme', t.attr); else html.removeAttribute('data-theme');
       html.style.colorScheme = (t.cs ? t.cs : (html.classList.contains('dark') ? 'dark' : 'light'));
       html.setAttribute('data-font', p.font || 'inter'); html.setAttribute('data-accent', p.accent || 'emerald');
       var s = html.style, scale = (+p.fontScale || 100);
-      s.setProperty('--inema-font-scale', (scale/100).toString()); s.setProperty('font-size', scale + '%');
+      s.setProperty('--ARCKHÉ-font-scale', (scale/100).toString()); s.setProperty('font-size', scale + '%');
       s.setProperty('--measure', (+p.lineWidth || 68) + 'ch'); s.setProperty('--lh-body', (+p.leading || 1.7).toString());
       var fam = p.font === 'system' ? 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif' : (p.font === 'leitura' ? '"Atkinson Hyperlegible", "Inter", system-ui, sans-serif' : '"Inter", system-ui, sans-serif');
       s.setProperty('--font-body', fam);
@@ -42,7 +42,7 @@
   </script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="../../assets/learn.css" rel="stylesheet"/>
-<script data-inema-manifest="" type="application/json">
+<script data-ARCKHÉ-manifest="" type="application/json">
   {
     "course": "storm-research",
     "tracks": [
@@ -69,7 +69,7 @@
 <style>
     body { font-family: 'Inter', sans-serif; }
     .dark body { background-color: #111827; }
-    [data-inema-topic], [id^="topico-"] { scroll-margin-top: 5rem; }
+    [data-ARCKHÉ-topic], [id^="topico-"] { scroll-margin-top: 5rem; }
     html:not(.dark) body { background-color: #f8fafc; }
     html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
     html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
@@ -109,8 +109,8 @@
     .dark .divide-dark-600 > :not([hidden]) ~ :not([hidden]) { border-color: #374151; }
     html:not(.dark) svg[role="img"] { filter: saturate(0.82) brightness(0.96); }
   </style>
-<link href="https://inematds.github.io/storm-research/curso/trilha3/modulo-3-3.html" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/storm-research/en/curso/trilha3/modulo-3-3.html" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/storm-research/es/curso/trilha3/modulo-3-3.html" hreflang="es" rel="alternate"/></head>
-<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="modulo-3-3.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">PT</a><a href="../../en/curso/trilha3/modulo-3-3.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="../../es/curso/trilha3/modulo-3-3.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<link href="https://linnoff88-dev.github.io/arckhe-/curso/trilha3/modulo-3-3.html" hreflang="pt-BR" rel="alternate"/><link href="https://linnoff88-dev.github.io/arckhe-/en/curso/trilha3/modulo-3-3.html" hreflang="en" rel="alternate"/><link href="https://linnoff88-dev.github.io/arckhe-/es/curso/trilha3/modulo-3-3.html" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="ARCKHÉ-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="modulo-3-3.html" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">PT</a><a href="../../en/curso/trilha3/modulo-3-3.html" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="../../es/curso/trilha3/modulo-3-3.html" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
 <a class="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-2 focus:left-2 focus:px-4 focus:py-2 focus:bg-dark-800 focus:text-purple-400 focus:rounded-lg" href="#conteudo">Pular para o conteudo</a>
 <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -120,7 +120,7 @@
 <span class="text-2xl">🌩️</span><span class="font-bold text-lg hidden sm:inline">STORM Research</span>
 </a>
 <span class="text-neutral-600">|</span>
-<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://ARCKHÉ AI" target="_blank">ARCKHÉ AI</a>
 </div>
 <div class="flex items-center space-x-1 sm:space-x-2">
 <a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="../trilha1/index.html">
@@ -132,29 +132,29 @@
 <a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10" href="index.html">
 <span class="sm:hidden">T3</span><span class="hidden sm:inline">Avancado</span>
 </a>
-<button class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors text-sm" data-inema-journey-open="" type="button">
+<button class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors text-sm" data-ARCKHÉ-journey-open="" type="button">
 <span aria-hidden="true">◷</span><span>Minha jornada</span>
-<span aria-hidden="true" class="inema-journey-badge" data-count="0" data-inema-journey-badge=""></span>
+<span aria-hidden="true" class="ARCKHÉ-journey-badge" data-count="0" data-ARCKHÉ-journey-badge=""></span>
 </button>
 <div class="relative">
-<button aria-expanded="false" aria-haspopup="true" class="inema-appearance-trigger" data-inema-appearance-toggle="#appearance-pop" title="Aparencia e leitura" type="button">
+<button aria-expanded="false" aria-haspopup="true" class="ARCKHÉ-appearance-trigger" data-ARCKHÉ-appearance-toggle="#appearance-pop" title="Aparencia e leitura" type="button">
 <span aria-hidden="true">◑</span><span class="hidden sm:inline text-sm">Aparencia</span>
 </button>
-<div class="inema-appearance-pop" data-inema-appearance="" data-open="false" id="appearance-pop" style="right:0;">
-<div class="inema-pref-group"><span class="inema-pref-group__label">Tema</span><div class="inema-segment">
-<button data-inema-set-theme="inema-dark" type="button">Escuro</button><button data-inema-set-theme="claro" type="button">Claro</button><button data-inema-set-theme="sepia" type="button">Sepia</button><button data-inema-set-theme="contraste" type="button">Alto contraste</button>
+<div class="ARCKHÉ-appearance-pop" data-ARCKHÉ-appearance="" data-open="false" id="appearance-pop" style="right:0;">
+<div class="ARCKHÉ-pref-group"><span class="ARCKHÉ-pref-group__label">Tema</span><div class="ARCKHÉ-segment">
+<button data-ARCKHÉ-set-theme="ARCKHÉ-dark" type="button">Escuro</button><button data-ARCKHÉ-set-theme="claro" type="button">Claro</button><button data-ARCKHÉ-set-theme="sepia" type="button">Sepia</button><button data-ARCKHÉ-set-theme="contraste" type="button">Alto contraste</button>
 </div></div>
-<div class="inema-pref-group"><span class="inema-pref-group__label">Fonte</span><div class="inema-segment">
-<button data-inema-set-font="inter" type="button">Inter</button><button data-inema-set-font="system" type="button">Sistema</button><button data-inema-set-font="leitura" type="button">Leitura</button>
+<div class="ARCKHÉ-pref-group"><span class="ARCKHÉ-pref-group__label">Fonte</span><div class="ARCKHÉ-segment">
+<button data-ARCKHÉ-set-font="inter" type="button">Inter</button><button data-ARCKHÉ-set-font="system" type="button">Sistema</button><button data-ARCKHÉ-set-font="leitura" type="button">Leitura</button>
 </div></div>
-<div class="inema-pref-group"><span class="inema-pref-group__label">Tamanho</span><div class="inema-segment">
-<button data-inema-set-fontscale="100" type="button">A</button><button data-inema-set-fontscale="112" type="button">A+</button><button data-inema-set-fontscale="125" type="button">A++</button>
+<div class="ARCKHÉ-pref-group"><span class="ARCKHÉ-pref-group__label">Tamanho</span><div class="ARCKHÉ-segment">
+<button data-ARCKHÉ-set-fontscale="100" type="button">A</button><button data-ARCKHÉ-set-fontscale="112" type="button">A+</button><button data-ARCKHÉ-set-fontscale="125" type="button">A++</button>
 </div></div>
-<div class="inema-pref-group"><span class="inema-pref-group__label">Entrelinha</span><div class="inema-segment">
-<button data-inema-set-leading="1.45" type="button">Compacto</button><button data-inema-set-leading="1.7" type="button">Confortavel</button>
+<div class="ARCKHÉ-pref-group"><span class="ARCKHÉ-pref-group__label">Entrelinha</span><div class="ARCKHÉ-segment">
+<button data-ARCKHÉ-set-leading="1.45" type="button">Compacto</button><button data-ARCKHÉ-set-leading="1.7" type="button">Confortavel</button>
 </div></div>
-<div class="inema-pref-group"><span class="inema-pref-group__label">Acento</span><div class="inema-accent-grid">
-<button data-accent="emerald" data-inema-set-accent="emerald" title="Esmeralda" type="button"></button><button data-accent="blue" data-inema-set-accent="blue" title="Azul" type="button"></button><button data-accent="purple" data-inema-set-accent="purple" title="Roxo" type="button"></button><button data-accent="amber" data-inema-set-accent="amber" title="Ambar" type="button"></button><button data-accent="teal" data-inema-set-accent="teal" title="Teal" type="button"></button><button data-accent="rose" data-inema-set-accent="rose" title="Rose" type="button"></button>
+<div class="ARCKHÉ-pref-group"><span class="ARCKHÉ-pref-group__label">Acento</span><div class="ARCKHÉ-accent-grid">
+<button data-accent="emerald" data-ARCKHÉ-set-accent="emerald" title="Esmeralda" type="button"></button><button data-accent="blue" data-ARCKHÉ-set-accent="blue" title="Azul" type="button"></button><button data-accent="purple" data-ARCKHÉ-set-accent="purple" title="Roxo" type="button"></button><button data-accent="amber" data-ARCKHÉ-set-accent="amber" title="Ambar" type="button"></button><button data-accent="teal" data-ARCKHÉ-set-accent="teal" title="Teal" type="button"></button><button data-accent="rose" data-ARCKHÉ-set-accent="rose" title="Rose" type="button"></button>
 </div></div>
 </div>
 </div>
@@ -185,36 +185,36 @@
 <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">Avançado</div><div class="text-xs text-neutral-400">Nível</div></div>
 <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">Prático</div><div class="text-xs text-neutral-400">Tipo</div></div>
 </div>
-<div class="mt-6 max-w-md"><div aria-label="Progresso do módulo 3.3" aria-valuemax="100" aria-valuemin="0" class="inema-meter" data-inema-meter="modulo:3-3" role="progressbar">
-<div class="inema-meter-label flex items-center justify-between mb-2"><strong class="text-sm">Progresso do módulo</strong><span class="inema-meter-pct text-purple-400 font-bold">0%</span></div>
-<div class="inema-bar"><span class="inema-bar__fill"></span></div><span class="inema-meter-count text-xs text-neutral-400">0 de 6 tópicos lidos</span>
+<div class="mt-6 max-w-md"><div aria-label="Progresso do módulo 3.3" aria-valuemax="100" aria-valuemin="0" class="ARCKHÉ-meter" data-ARCKHÉ-meter="modulo:3-3" role="progressbar">
+<div class="ARCKHÉ-meter-label flex items-center justify-between mb-2"><strong class="text-sm">Progresso do módulo</strong><span class="ARCKHÉ-meter-pct text-purple-400 font-bold">0%</span></div>
+<div class="ARCKHÉ-bar"><span class="ARCKHÉ-bar__fill"></span></div><span class="ARCKHÉ-meter-count text-xs text-neutral-400">0 de 6 tópicos lidos</span>
 </div></div>
 </div>
 </header>
 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:grid lg:grid-cols-[220px_1fr] lg:gap-10">
 <!-- TOC -->
-<nav aria-label="Índice da página" class="hidden lg:block sticky top-24 self-start" data-inema-toc="">
-<p class="text-sm text-neutral-400 mb-3">Seçêo <span class="inema-toc-pos">1</span> de <span class="inema-toc-total">6</span></p>
+<nav aria-label="Índice da página" class="hidden lg:block sticky top-24 self-start" data-ARCKHÉ-toc="">
+<p class="text-sm text-neutral-400 mb-3">Seçêo <span class="ARCKHÉ-toc-pos">1</span> de <span class="ARCKHÉ-toc-total">6</span></p>
 <ul class="space-y-1 text-sm">
-<li><a class="inema-toc-link block py-1 text-neutral-400 hover:text-purple-400 transition-colors" href="#topico-1">1. Adicionar uma 6ª lente</a></li>
-<li><a class="inema-toc-link block py-1 text-neutral-400 hover:text-purple-400 transition-colors" href="#topico-2">2. Mirar no leitor</a></li>
-<li><a class="inema-toc-link block py-1 text-neutral-400 hover:text-purple-400 transition-colors" href="#topico-3">3. Editar o template</a></li>
-<li><a class="inema-toc-link block py-1 text-neutral-400 hover:text-purple-400 transition-colors" href="#topico-4">4. Modelo por subagente</a></li>
-<li><a class="inema-toc-link block py-1 text-neutral-400 hover:text-purple-400 transition-colors" href="#topico-5">5. Usar com Codex/outros</a></li>
-<li><a class="inema-toc-link block py-1 text-neutral-400 hover:text-purple-400 transition-colors" href="#topico-6">6. Princípios STORM adiante</a></li>
+<li><a class="ARCKHÉ-toc-link block py-1 text-neutral-400 hover:text-purple-400 transition-colors" href="#topico-1">1. Adicionar uma 6ª lente</a></li>
+<li><a class="ARCKHÉ-toc-link block py-1 text-neutral-400 hover:text-purple-400 transition-colors" href="#topico-2">2. Mirar no leitor</a></li>
+<li><a class="ARCKHÉ-toc-link block py-1 text-neutral-400 hover:text-purple-400 transition-colors" href="#topico-3">3. Editar o template</a></li>
+<li><a class="ARCKHÉ-toc-link block py-1 text-neutral-400 hover:text-purple-400 transition-colors" href="#topico-4">4. Modelo por subagente</a></li>
+<li><a class="ARCKHÉ-toc-link block py-1 text-neutral-400 hover:text-purple-400 transition-colors" href="#topico-5">5. Usar com Codex/outros</a></li>
+<li><a class="ARCKHÉ-toc-link block py-1 text-neutral-400 hover:text-purple-400 transition-colors" href="#topico-6">6. Princípios STORM adiante</a></li>
 </ul>
 </nav>
-<main class="inema-prose min-w-0" id="conteudo">
+<main class="ARCKHÉ-prose min-w-0" id="conteudo">
 <!-- TÓPICO 1 -->
-<section class="mb-16" data-inema-topic="modulo-3-3#topico-1" id="topico-1">
+<section class="mb-16" data-ARCKHÉ-topic="modulo-3-3#topico-1" id="topico-1">
 <div class="flex items-center justify-between gap-4 mb-6 flex-wrap">
 <div class="flex items-center space-x-4">
 <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">1</span>
 <h2 class="text-2xl font-bold">➕ Adicionar uma 6ª lente</h2>
 </div>
-<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Marcar dúvida neste tópico" type="button"><span aria-hidden="true">?</span><span>Tenho dúvida</span></button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-ARCKHÉ-doubt-toggle="" title="Marcar dúvida neste tópico" type="button"><span aria-hidden="true">?</span><span>Tenho dúvida</span></button>
 </div>
-<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m3-3-t1-p1">As cinco lentes sêo um <strong class="text-neutral-100">padrêo sólido, nêo uma lei</strong>. A Fase 1 do <code class="font-mono text-purple-400">SKILL.md</code> tem cinco prompts exatos; adicionar uma sexta é copiar esse molde e trocar o papel. O próprio método já nomeia "a 6ª lente ausente" como o ponto cego do relatório — aqui você a transforma em uma lente de verdade, que pesquisa e responde como as outras.</p>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-ARCKHÉ-block="m3-3-t1-p1">As cinco lentes sêo um <strong class="text-neutral-100">padrêo sólido, nêo uma lei</strong>. A Fase 1 do <code class="font-mono text-purple-400">SKILL.md</code> tem cinco prompts exatos; adicionar uma sexta é copiar esse molde e trocar o papel. O próprio método já nomeia "a 6ª lente ausente" como o ponto cego do relatório — aqui você a transforma em uma lente de verdade, que pesquisa e responde como as outras.</p>
 <p class="text-neutral-300 mb-6 leading-relaxed">A imagem trata isso como uma equaçêo: as cinco lentes padrêo, mais uma nova que segue o mesmo contrato, somam um relatório com um buraco a menos.</p>
 <div class="rounded-2xl border border-purple-500/30 bg-dark-900/40 p-3 sm:p-4 mb-3 overflow-hidden">
 <svg aria-label="Equaçêo visual: as cinco lentes padrêo mais uma sexta lente que você adiciona somam um relatório com menos pontos cegos" class="w-full h-auto" role="img" viewbox="0 0 1000 300">
@@ -293,22 +293,22 @@ Cite fontes reais com URLs. Menos de 400 palavras.</pre>
 <p class="text-neutral-300 text-sm">O método recomenda <strong>nêo passar de cinco lentes</strong> por padrêo — cada lente extra é ~1 agente a mais (e mais um verificador na Fase 4). Adicionar a 6ª é uma <em>escolha consciente</em>: faça quando há um ângulo realmente ausente (o iniciante, o criador de conteúdo, o regulador). Trocar "O INICIANTE EM IA" por "O CRIADOR DE CONTEÚDO" é só mudar o papel e a frase de pesquisa — o resto do molde fica igual.</p>
 </div>
 <div class="flex justify-start mt-6">
-<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors" data-inema-read-toggle="" type="button">
-<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span>
-<span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido ✓</span>
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors" data-ARCKHÉ-read-toggle="" type="button">
+<span aria-hidden="true" class="ARCKHÉ-ico-todo">○</span><span aria-hidden="true" class="ARCKHÉ-ico-done">●</span>
+<span class="ARCKHÉ-label-todo">Marcar como lido</span><span class="ARCKHÉ-label-done">Lido ✓</span>
 </button>
 </div>
 </section>
 <!-- TÓPICO 2 -->
-<section class="mb-16" data-inema-topic="modulo-3-3#topico-2" id="topico-2">
+<section class="mb-16" data-ARCKHÉ-topic="modulo-3-3#topico-2" id="topico-2">
 <div class="flex items-center justify-between gap-4 mb-6 flex-wrap">
 <div class="flex items-center space-x-4">
 <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">2</span>
 <h2 class="text-2xl font-bold">🎯 Mirar no leitor (tailored)</h2>
 </div>
-<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Marcar dúvida neste tópico" type="button"><span aria-hidden="true">?</span><span>Tenho dúvida</span></button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-ARCKHÉ-doubt-toggle="" title="Marcar dúvida neste tópico" type="button"><span aria-hidden="true">?</span><span>Tenho dúvida</span></button>
 </div>
-<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m3-3-t2-p1">A Fase 0 identifica o <strong class="text-neutral-100">papel do leitor</strong> para direcionar o insight acionável e o guia de segurança das afirmações. Em vez de informar isso toda vez, você pode <strong class="text-purple-400">pré-carregar o contexto do seu negócio</strong> — e todo relatório já sai mirado em você.</p>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-ARCKHÉ-block="m3-3-t2-p1">A Fase 0 identifica o <strong class="text-neutral-100">papel do leitor</strong> para direcionar o insight acionável e o guia de segurança das afirmações. Em vez de informar isso toda vez, você pode <strong class="text-purple-400">pré-carregar o contexto do seu negócio</strong> — e todo relatório já sai mirado em você.</p>
 <div class="bg-dark-900 rounded-xl border border-dark-600 p-5 mb-6">
 <div class="flex items-center justify-between mb-3"><span class="text-xs font-mono text-neutral-500">contexto que você dá uma vez (ex.: CLAUDE.md do projeto)</span><span class="text-xs text-neutral-500">ilustrativo</span></div>
 <pre class="font-mono text-sm text-neutral-300 overflow-x-auto leading-relaxed whitespace-pre-wrap">Sou <span class="text-purple-400">&lt;seu papel — ex.: head de produto de uma fintech&gt;</span>.
@@ -339,21 +339,21 @@ salvo se eu disser o contrário.</pre>
 <p class="text-neutral-300 text-sm">Contexto direciona <strong>o insight e o guia de segurança</strong> — nêo enviesa a pesquisa das lentes. Cada lente continua fazendo busca real e o cético continua atacando a sua premissa. Você muda para QUEM o relatório fala, nêo O QUE ele considera verdade.</p>
 </div>
 <div class="flex justify-start mt-6">
-<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors" data-inema-read-toggle="" type="button">
-<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido ✓</span>
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors" data-ARCKHÉ-read-toggle="" type="button">
+<span aria-hidden="true" class="ARCKHÉ-ico-todo">○</span><span aria-hidden="true" class="ARCKHÉ-ico-done">●</span><span class="ARCKHÉ-label-todo">Marcar como lido</span><span class="ARCKHÉ-label-done">Lido ✓</span>
 </button>
 </div>
 </section>
 <!-- TÓPICO 3 -->
-<section class="mb-16" data-inema-topic="modulo-3-3#topico-3" id="topico-3">
+<section class="mb-16" data-ARCKHÉ-topic="modulo-3-3#topico-3" id="topico-3">
 <div class="flex items-center justify-between gap-4 mb-6 flex-wrap">
 <div class="flex items-center space-x-4">
 <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">3</span>
 <h2 class="text-2xl font-bold">🎨 Editar o report-template</h2>
 </div>
-<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Marcar dúvida neste tópico" type="button"><span aria-hidden="true">?</span><span>Tenho dúvida</span></button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-ARCKHÉ-doubt-toggle="" title="Marcar dúvida neste tópico" type="button"><span aria-hidden="true">?</span><span>Tenho dúvida</span></button>
 </div>
-<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m3-3-t3-p1">O <code class="font-mono text-purple-400">report-template.html</code> é o molde do briefing. A Fase 3 manda <strong class="text-neutral-100">cloná-lo, nêo recriar o CSS</strong>. Customizar com segurança é mexer no <em>conteúdo</em> e nos <em>rótulos</em> — sem rasgar o estilo visual, que o método pede para manter idêntico.</p>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-ARCKHÉ-block="m3-3-t3-p1">O <code class="font-mono text-purple-400">report-template.html</code> é o molde do briefing. A Fase 3 manda <strong class="text-neutral-100">cloná-lo, nêo recriar o CSS</strong>. Customizar com segurança é mexer no <em>conteúdo</em> e nos <em>rótulos</em> — sem rasgar o estilo visual, que o método pede para manter idêntico.</p>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
 <div class="bg-purple-900/20 rounded-xl border border-purple-500/30 p-6">
 <h4 class="font-bold text-purple-400 mb-4">✓ Mexa à vontade</h4>
@@ -387,21 +387,21 @@ salvo se eu disser o contrário.</pre>
 <p class="text-neutral-300 text-sm">O design (limpo, profissional, Montserrat / Roboto Mono, destaque azul) faz o briefing parecer confiável e ser legível em qualquer máquina, sem build. Se você troca o estilo inteiro, perde a consistência entre relatórios e arrisca quebrar o layout. Regra de bolso: <strong>edite o que se lê, preserve o que se vê</strong>.</p>
 </div>
 <div class="flex justify-start mt-6">
-<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors" data-inema-read-toggle="" type="button">
-<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido ✓</span>
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors" data-ARCKHÉ-read-toggle="" type="button">
+<span aria-hidden="true" class="ARCKHÉ-ico-todo">○</span><span aria-hidden="true" class="ARCKHÉ-ico-done">●</span><span class="ARCKHÉ-label-todo">Marcar como lido</span><span class="ARCKHÉ-label-done">Lido ✓</span>
 </button>
 </div>
 </section>
 <!-- TÓPICO 4 -->
-<section class="mb-16" data-inema-topic="modulo-3-3#topico-4" id="topico-4">
+<section class="mb-16" data-ARCKHÉ-topic="modulo-3-3#topico-4" id="topico-4">
 <div class="flex items-center justify-between gap-4 mb-6 flex-wrap">
 <div class="flex items-center space-x-4">
 <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">4</span>
 <h2 class="text-2xl font-bold">🧠 Modelo por subagente</h2>
 </div>
-<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Marcar dúvida neste tópico" type="button"><span aria-hidden="true">?</span><span>Tenho dúvida</span></button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-ARCKHÉ-doubt-toggle="" title="Marcar dúvida neste tópico" type="button"><span aria-hidden="true">?</span><span>Tenho dúvida</span></button>
 </div>
-<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m3-3-t4-p1">Cada lente é um agente <code class="font-mono text-purple-400">general-purpose</code> independente. Você pode rodar <strong class="text-neutral-100">lentes diferentes em modelos diferentes</strong> (Opus, Sonnet, Haiku) e equilibrar custo e qualidade: raciocínio pesado onde dói, modelo leve onde a tarefa é direta.</p>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-ARCKHÉ-block="m3-3-t4-p1">Cada lente é um agente <code class="font-mono text-purple-400">general-purpose</code> independente. Você pode rodar <strong class="text-neutral-100">lentes diferentes em modelos diferentes</strong> (Opus, Sonnet, Haiku) e equilibrar custo e qualidade: raciocínio pesado onde dói, modelo leve onde a tarefa é direta.</p>
 <div class="space-y-6 mb-6">
 <div class="flex items-start space-x-4">
 <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center"><span class="text-purple-400 font-bold">⬆</span></div>
@@ -421,21 +421,21 @@ salvo se eu disser o contrário.</pre>
 <p class="text-neutral-300 text-sm">O padrêo (mesmo modelo para todos) funciona muito bem. Mexa em modelo por subagente só quando custo ou limite de uso virar um problema real — e meça antes de assumir que o modelo mais barato baixou a qualidade.</p>
 </div>
 <div class="flex justify-start mt-6">
-<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors" data-inema-read-toggle="" type="button">
-<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido ✓</span>
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors" data-ARCKHÉ-read-toggle="" type="button">
+<span aria-hidden="true" class="ARCKHÉ-ico-todo">○</span><span aria-hidden="true" class="ARCKHÉ-ico-done">●</span><span class="ARCKHÉ-label-todo">Marcar como lido</span><span class="ARCKHÉ-label-done">Lido ✓</span>
 </button>
 </div>
 </section>
 <!-- TÓPICO 5 -->
-<section class="mb-16" data-inema-topic="modulo-3-3#topico-5" id="topico-5">
+<section class="mb-16" data-ARCKHÉ-topic="modulo-3-3#topico-5" id="topico-5">
 <div class="flex items-center justify-between gap-4 mb-6 flex-wrap">
 <div class="flex items-center space-x-4">
 <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">5</span>
 <h2 class="text-2xl font-bold">🔀 Usar com Codex e outros agentes</h2>
 </div>
-<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Marcar dúvida neste tópico" type="button"><span aria-hidden="true">?</span><span>Tenho dúvida</span></button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-ARCKHÉ-doubt-toggle="" title="Marcar dúvida neste tópico" type="button"><span aria-hidden="true">?</span><span>Tenho dúvida</span></button>
 </div>
-<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m3-3-t5-p1">A skill é <strong class="text-purple-400">autocontida e portátil</strong>: só depende de ferramentas nativas (agente, escrita, busca/fetch na web) e do template na mesma pasta. Por isso ela viaja para outros agentes — muda só <strong class="text-neutral-100">onde a pasta mora</strong>.</p>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-ARCKHÉ-block="m3-3-t5-p1">A skill é <strong class="text-purple-400">autocontida e portátil</strong>: só depende de ferramentas nativas (agente, escrita, busca/fetch na web) e do template na mesma pasta. Por isso ela viaja para outros agentes — muda só <strong class="text-neutral-100">onde a pasta mora</strong>.</p>
 <div class="bg-dark-900 rounded-xl border border-dark-600 p-5 mb-6">
 <div class="flex items-center justify-between mb-3"><span class="text-xs font-mono text-neutral-500">a mesma pasta, em agentes diferentes</span><span class="text-xs text-neutral-500">ilustrativo</span></div>
 <pre class="font-mono text-sm text-neutral-300 overflow-x-auto leading-relaxed">.claude/skills/storm-research/   <span class="text-neutral-500"># Claude Code</span>
@@ -457,21 +457,21 @@ salvo se eu disser o contrário.</pre>
 <p class="text-neutral-300 text-sm">O nome exato da ferramenta de subagente e de busca pode mudar de um agente para outro. Se outro agente nêo tiver paralelismo de subagentes ou acesso à web, a essência continua — você só perde a vantagem de rodar as cinco lentes ao mesmo tempo.</p>
 </div>
 <div class="flex justify-start mt-6">
-<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors" data-inema-read-toggle="" type="button">
-<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido ✓</span>
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors" data-ARCKHÉ-read-toggle="" type="button">
+<span aria-hidden="true" class="ARCKHÉ-ico-todo">○</span><span aria-hidden="true" class="ARCKHÉ-ico-done">●</span><span class="ARCKHÉ-label-todo">Marcar como lido</span><span class="ARCKHÉ-label-done">Lido ✓</span>
 </button>
 </div>
 </section>
 <!-- TÓPICO 6 -->
-<section class="mb-16" data-inema-topic="modulo-3-3#topico-6" id="topico-6">
+<section class="mb-16" data-ARCKHÉ-topic="modulo-3-3#topico-6" id="topico-6">
 <div class="flex items-center justify-between gap-4 mb-6 flex-wrap">
 <div class="flex items-center space-x-4">
 <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">6</span>
 <h2 class="text-2xl font-bold">🌐 Levar os princípios STORM adiante</h2>
 </div>
-<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-inema-doubt-toggle="" title="Marcar dúvida neste tópico" type="button"><span aria-hidden="true">?</span><span>Tenho dúvida</span></button>
+<button aria-pressed="false" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dark-700 border border-dark-600 text-neutral-300 hover:bg-dark-600 transition-colors text-sm" data-ARCKHÉ-doubt-toggle="" title="Marcar dúvida neste tópico" type="button"><span aria-hidden="true">?</span><span>Tenho dúvida</span></button>
 </div>
-<p class="text-neutral-300 mb-6 leading-relaxed" data-inema-block="m3-3-t6-p1">Tire o HTML e o pipeline da frente e sobram <strong class="text-neutral-100">dois princípios transferíveis</strong>: (1) múltiplas perspectivas deliberadas em vez de uma só, e (2) verificaçêo adversarial antes de confiar. Eles servem para muito mais do que pesquisa.</p>
+<p class="text-neutral-300 mb-6 leading-relaxed" data-ARCKHÉ-block="m3-3-t6-p1">Tire o HTML e o pipeline da frente e sobram <strong class="text-neutral-100">dois princípios transferíveis</strong>: (1) múltiplas perspectivas deliberadas em vez de uma só, e (2) verificaçêo adversarial antes de confiar. Eles servem para muito mais do que pesquisa.</p>
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-purple-400 font-semibold mb-1">🏛️ Conselho de decisêo</div><p class="text-xs text-neutral-400">Vários papéis opinam sobre uma escolha; a contradiçêo vira insumo, nêo ruído.</p></div>
 <div class="bg-dark-800 rounded-lg p-4 border border-dark-600"><div class="text-purple-400 font-semibold mb-1">🔥 Roast do seu plano</div><p class="text-xs text-neutral-400">Um agente cético ataca de propósito a sua proposta antes de você apostar nela.</p></div>
@@ -497,18 +497,18 @@ salvo se eu disser o contrário.</pre>
 </div>
 </div>
 <!-- CHECAGEM LEVE -->
-<div class="inema-check mt-8 bg-dark-800 border border-dark-600 rounded-xl p-6" data-inema-check="modulo-3-3#q1">
+<div class="ARCKHÉ-check mt-8 bg-dark-800 border border-dark-600 rounded-xl p-6" data-ARCKHÉ-check="modulo-3-3#q1">
 <p class="font-medium mb-4">Auto-recuperaçêo (opcional): ao adicionar uma 6ª lente, o que ela DEVE manter para a síntese continuar funcionando?</p>
-<div class="inema-check-options space-y-2">
-<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="0" type="button">Um nome chamativo e um emoji próprio</button>
-<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="1" type="button">As 3 saídas obrigatórias: POSIÇêO CENTRAL, EVIDÊNCIA MAIS FORTE e A ÚNICA COISA</button>
-<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-inema-check-option="2" type="button">Rodar num modelo diferente das outras lentes</button>
+<div class="ARCKHÉ-check-options space-y-2">
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-ARCKHÉ-check-option="0" type="button">Um nome chamativo e um emoji próprio</button>
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-ARCKHÉ-check-option="1" type="button">As 3 saídas obrigatórias: POSIÇêO CENTRAL, EVIDÊNCIA MAIS FORTE e A ÚNICA COISA</button>
+<button class="block w-full text-left px-4 py-2 rounded-lg bg-dark-700 border border-dark-600 hover:bg-dark-600 transition-colors text-sm" data-ARCKHÉ-check-option="2" type="button">Rodar num modelo diferente das outras lentes</button>
 </div>
-<div aria-live="polite" class="mt-4 text-sm" data-inema-check-feedback="" role="status"></div>
+<div aria-live="polite" class="mt-4 text-sm" data-ARCKHÉ-check-feedback="" role="status"></div>
 </div>
 <div class="flex justify-start mt-6">
-<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors" data-inema-read-toggle="" type="button">
-<span aria-hidden="true" class="inema-ico-todo">○</span><span aria-hidden="true" class="inema-ico-done">●</span><span class="inema-label-todo">Marcar como lido</span><span class="inema-label-done">Lido ✓</span>
+<button aria-pressed="false" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-500/20 border border-purple-500/30 text-purple-400 hover:bg-purple-500/30 transition-colors" data-ARCKHÉ-read-toggle="" type="button">
+<span aria-hidden="true" class="ARCKHÉ-ico-todo">○</span><span aria-hidden="true" class="ARCKHÉ-ico-done">●</span><span class="ARCKHÉ-label-todo">Marcar como lido</span><span class="ARCKHÉ-label-done">Lido ✓</span>
 </button>
 </div>
 </section>
@@ -532,7 +532,7 @@ salvo se eu disser o contrário.</pre>
 </main>
 </div>
 <footer class="border-t border-dark-600 py-8 mt-8">
-<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>STORM Research · Curso INEMA · 2026 · <a class="text-sky-400 hover:text-sky-300" href="https://inema.club" target="_blank">INEMA.CLUB</a></p></div>
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm"><p>STORM Research · Curso ARCKHÉ · 2026 · <a class="text-sky-400 hover:text-sky-300" href="https://ARCKHÉ AI" target="_blank">ARCKHÉ AI</a></p></div>
 </footer>
 <script>
     (function () {
@@ -544,18 +544,18 @@ salvo se eu disser o contrário.</pre>
       sync();
       themeToggle && themeToggle.addEventListener('click', () => {
         html.classList.toggle('dark'); const isDark = html.classList.contains('dark'); html.style.colorScheme = isDark ? 'dark' : 'light';
-        try { var p = JSON.parse(localStorage.getItem('inema.prefs')||'{}'); p.theme = isDark ? 'inema-dark' : 'claro'; localStorage.setItem('inema.prefs', JSON.stringify(p)); localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch(e){}
-        sync(); if (window.INEMA && INEMA.applyPrefs) try { INEMA.applyPrefs(); } catch(e){}
+        try { var p = JSON.parse(localStorage.getItem('ARCKHÉ.prefs')||'{}'); p.theme = isDark ? 'ARCKHÉ-dark' : 'claro'; localStorage.setItem('ARCKHÉ.prefs', JSON.stringify(p)); localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch(e){}
+        sync(); if (window.ARCKHÉ && ARCKHÉ.applyPrefs) try { ARCKHÉ.applyPrefs(); } catch(e){}
       });
     })();
     function openModal(){} function closeModal(){}
   </script>
 <script src="../../assets/learn.js"></script>
 <script>
-    if (window.INEMA && typeof window.INEMA.init === 'function') window.INEMA.init();
+    if (window.ARCKHÉ && typeof window.ARCKHÉ.init === 'function') window.ARCKHÉ.init();
     window.addEventListener('DOMContentLoaded', function () {
-      if (window.INEMA && INEMA.registerCheck) {
-        INEMA.registerCheck('modulo-3-3#q1', {
+      if (window.ARCKHÉ && ARCKHÉ.registerCheck) {
+        ARCKHÉ.registerCheck('modulo-3-3#q1', {
           answer: 1,
           explain: {
             0: 'Nome e emoji ajudam a leitura, mas nêo sêo o que faz a síntese funcionar. O que importa é o formato das saídas.',

@@ -4,30 +4,30 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta content="storm-research" name="inema-course"/>
+<meta content="storm-research" name="ARCKHÉ-course"/>
 <meta content="Curso STORM Research — investigación multiperspectiva verificada con Claude. Cinco perspectivas de especialistas, mapa de contradicciones y verificación de fuentes, todo empaquetado en una skill de Claude Code." name="description"/>
 <!-- ANTI-FOUC: aplica tema/leitura ANTES do primeiro paint (default dark no erro) -->
 <script>
   (function () {
     try {
       var html = document.documentElement;
-      var DEF = { theme: 'inema-dark', font: 'inter', fontScale: 100, lineWidth: 68, leading: 1.7, accent: 'emerald' };
+      var DEF = { theme: 'ARCKHÉ-dark', font: 'inter', fontScale: 100, lineWidth: 68, leading: 1.7, accent: 'emerald' };
       function clone(o){var r={};for(var x in o)r[x]=o[x];return r;}
       var p = clone(DEF);
       try {
-        var raw = localStorage.getItem('inema.prefs');
+        var raw = localStorage.getItem('ARCKHÉ.prefs');
         if (raw) { var parsed = JSON.parse(raw); if (parsed && typeof parsed==='object'){ for (var k in DEF) if (parsed[k]!=null) p[k]=parsed[k]; } }
-        else { var legacy = localStorage.getItem('theme'); if (legacy==='light') p.theme='claro'; else if (legacy==='dark') p.theme='inema-dark'; }
+        else { var legacy = localStorage.getItem('theme'); if (legacy==='light') p.theme='claro'; else if (legacy==='dark') p.theme='ARCKHÉ-dark'; }
       } catch (e) { p = clone(DEF); }
-      var THEMES = { 'inema-dark':{dark:true,attr:null,cs:'dark'},'claro':{dark:false,attr:null,cs:'light'},'sepia':{dark:false,attr:'sepia',cs:'light'},'foco':{dark:null,attr:'foco',cs:null},'contraste':{dark:true,attr:'contraste',cs:'dark'} };
-      var t = THEMES[p.theme] || THEMES['inema-dark'];
+      var THEMES = { 'ARCKHÉ-dark':{dark:true,attr:null,cs:'dark'},'claro':{dark:false,attr:null,cs:'light'},'sepia':{dark:false,attr:'sepia',cs:'light'},'foco':{dark:null,attr:'foco',cs:null},'contraste':{dark:true,attr:'contraste',cs:'dark'} };
+      var t = THEMES[p.theme] || THEMES['ARCKHÉ-dark'];
       if (t.dark === true) html.classList.add('dark'); else if (t.dark === false) html.classList.remove('dark');
       if (t.attr) html.setAttribute('data-theme', t.attr); else html.removeAttribute('data-theme');
       html.style.colorScheme = (t.cs ? t.cs : (html.classList.contains('dark') ? 'dark' : 'light'));
       html.setAttribute('data-font', p.font || 'inter');
       html.setAttribute('data-accent', p.accent || 'emerald');
       var s = html.style, scale = (+p.fontScale || 100);
-      s.setProperty('--inema-font-scale', (scale/100).toString());
+      s.setProperty('--ARCKHÉ-font-scale', (scale/100).toString());
       s.setProperty('font-size', scale + '%');
       s.setProperty('--measure', (+p.lineWidth || 68) + 'ch');
       s.setProperty('--lh-body', (+p.leading || 1.7).toString());
@@ -54,7 +54,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="../assets/learn.css" rel="stylesheet"/>
 <!-- Manifesto do curso (IDENTICO em todas as paginas) -->
-<script data-inema-manifest="" type="application/json">
+<script data-ARCKHÉ-manifest="" type="application/json">
   {
     "course": "storm-research",
     "tracks": [
@@ -83,7 +83,7 @@
     .dark body { background-color: #111827; }
     .topic-explanation { display: none; }
     .topic-explanation.active { display: block; }
-    [data-inema-topic], [id^="topico-"], [id^="modulo-"] { scroll-margin-top: 5rem; }
+    [data-ARCKHÉ-topic], [id^="topico-"], [id^="modulo-"] { scroll-margin-top: 5rem; }
 
     /* ===== Light mode (base) ===== */
     html:not(.dark) body { background-color: #f8fafc; }
@@ -148,8 +148,8 @@
       .wf-a:nth-child(4){animation-delay:.75s} .wf-a:nth-child(5){animation-delay:1s}
     }
   </style>
-<link href="https://inematds.github.io/storm-research/" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/storm-research/en/" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/storm-research/es/" hreflang="es" rel="alternate"/></head>
-<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="../en/" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="./" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">ES</a></div>
+<link href="https://linnoff88-dev.github.io/arckhe-/" hreflang="pt-BR" rel="alternate"/><link href="https://linnoff88-dev.github.io/arckhe-/en/" hreflang="en" rel="alternate"/><link href="https://linnoff88-dev.github.io/arckhe-/es/" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="ARCKHÉ-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="../en/" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="./" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">ES</a></div>
 <a class="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-2 focus:left-2 focus:px-4 focus:py-2 focus:bg-dark-800 focus:text-emerald-400 focus:rounded-lg" href="#conteudo">Saltar al contenido</a>
 <!-- ===== NAV ===== -->
 <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
@@ -161,7 +161,7 @@
 <span class="font-bold text-lg hidden sm:inline">STORM Research</span>
 </a>
 <span class="text-neutral-600">|</span>
-<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://ARCKHÉ AI" target="_blank">ARCKHÉ AI</a>
 </div>
 <div class="flex items-center space-x-1 sm:space-x-2">
 <a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="curso/trilha1/index.html">
@@ -173,56 +173,56 @@
 <a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="curso/trilha3/index.html">
 <span class="sm:hidden">T3</span><span class="hidden sm:inline">Avanzado</span>
 </a>
-<button class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors text-sm" data-inema-journey-open="" type="button">
+<button class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors text-sm" data-ARCKHÉ-journey-open="" type="button">
 <span aria-hidden="true">◷</span><span>Mi recorrido</span>
-<span aria-hidden="true" class="inema-journey-badge" data-count="0" data-inema-journey-badge=""></span>
+<span aria-hidden="true" class="ARCKHÉ-journey-badge" data-count="0" data-ARCKHÉ-journey-badge=""></span>
 </button>
 <div class="relative">
-<button aria-expanded="false" aria-haspopup="true" class="inema-appearance-trigger" data-inema-appearance-toggle="#appearance-pop" title="Apariencia y lectura" type="button">
+<button aria-expanded="false" aria-haspopup="true" class="ARCKHÉ-appearance-trigger" data-ARCKHÉ-appearance-toggle="#appearance-pop" title="Apariencia y lectura" type="button">
 <span aria-hidden="true">◑</span><span class="hidden sm:inline text-sm">Apariencia</span>
 </button>
-<div class="inema-appearance-pop" data-inema-appearance="" data-open="false" id="appearance-pop" style="right:0;">
-<div class="inema-pref-group">
-<span class="inema-pref-group__label">Tema</span>
-<div class="inema-segment">
-<button data-inema-set-theme="inema-dark" type="button">Oscuro</button>
-<button data-inema-set-theme="claro" type="button">Claro</button>
-<button data-inema-set-theme="sepia" type="button">Sepia</button>
-<button data-inema-set-theme="contraste" type="button">Alto contraste</button>
+<div class="ARCKHÉ-appearance-pop" data-ARCKHÉ-appearance="" data-open="false" id="appearance-pop" style="right:0;">
+<div class="ARCKHÉ-pref-group">
+<span class="ARCKHÉ-pref-group__label">Tema</span>
+<div class="ARCKHÉ-segment">
+<button data-ARCKHÉ-set-theme="ARCKHÉ-dark" type="button">Oscuro</button>
+<button data-ARCKHÉ-set-theme="claro" type="button">Claro</button>
+<button data-ARCKHÉ-set-theme="sepia" type="button">Sepia</button>
+<button data-ARCKHÉ-set-theme="contraste" type="button">Alto contraste</button>
 </div>
 </div>
-<div class="inema-pref-group">
-<span class="inema-pref-group__label">Fuente</span>
-<div class="inema-segment">
-<button data-inema-set-font="inter" type="button">Inter</button>
-<button data-inema-set-font="system" type="button">Sistema</button>
-<button data-inema-set-font="leitura" type="button">Lectura</button>
+<div class="ARCKHÉ-pref-group">
+<span class="ARCKHÉ-pref-group__label">Fuente</span>
+<div class="ARCKHÉ-segment">
+<button data-ARCKHÉ-set-font="inter" type="button">Inter</button>
+<button data-ARCKHÉ-set-font="system" type="button">Sistema</button>
+<button data-ARCKHÉ-set-font="leitura" type="button">Lectura</button>
 </div>
 </div>
-<div class="inema-pref-group">
-<span class="inema-pref-group__label">Tamaño</span>
-<div class="inema-segment">
-<button data-inema-set-fontscale="100" type="button">A</button>
-<button data-inema-set-fontscale="112" type="button">A+</button>
-<button data-inema-set-fontscale="125" type="button">A++</button>
+<div class="ARCKHÉ-pref-group">
+<span class="ARCKHÉ-pref-group__label">Tamaño</span>
+<div class="ARCKHÉ-segment">
+<button data-ARCKHÉ-set-fontscale="100" type="button">A</button>
+<button data-ARCKHÉ-set-fontscale="112" type="button">A+</button>
+<button data-ARCKHÉ-set-fontscale="125" type="button">A++</button>
 </div>
 </div>
-<div class="inema-pref-group">
-<span class="inema-pref-group__label">Interlineado</span>
-<div class="inema-segment">
-<button data-inema-set-leading="1.45" type="button">Compacto</button>
-<button data-inema-set-leading="1.7" type="button">Cómodo</button>
+<div class="ARCKHÉ-pref-group">
+<span class="ARCKHÉ-pref-group__label">Interlineado</span>
+<div class="ARCKHÉ-segment">
+<button data-ARCKHÉ-set-leading="1.45" type="button">Compacto</button>
+<button data-ARCKHÉ-set-leading="1.7" type="button">Cómodo</button>
 </div>
 </div>
-<div class="inema-pref-group">
-<span class="inema-pref-group__label">Acento</span>
-<div class="inema-accent-grid">
-<button data-accent="emerald" data-inema-set-accent="emerald" title="Esmeralda" type="button"></button>
-<button data-accent="blue" data-inema-set-accent="blue" title="Azul" type="button"></button>
-<button data-accent="purple" data-inema-set-accent="purple" title="Morado" type="button"></button>
-<button data-accent="amber" data-inema-set-accent="amber" title="Ámbar" type="button"></button>
-<button data-accent="teal" data-inema-set-accent="teal" title="Teal" type="button"></button>
-<button data-accent="rose" data-inema-set-accent="rose" title="Rosa" type="button"></button>
+<div class="ARCKHÉ-pref-group">
+<span class="ARCKHÉ-pref-group__label">Acento</span>
+<div class="ARCKHÉ-accent-grid">
+<button data-accent="emerald" data-ARCKHÉ-set-accent="emerald" title="Esmeralda" type="button"></button>
+<button data-accent="blue" data-ARCKHÉ-set-accent="blue" title="Azul" type="button"></button>
+<button data-accent="purple" data-ARCKHÉ-set-accent="purple" title="Morado" type="button"></button>
+<button data-accent="amber" data-ARCKHÉ-set-accent="amber" title="Ámbar" type="button"></button>
+<button data-accent="teal" data-ARCKHÉ-set-accent="teal" title="Teal" type="button"></button>
+<button data-accent="rose" data-ARCKHÉ-set-accent="rose" title="Rosa" type="button"></button>
 </div>
 </div>
 </div>
@@ -250,13 +250,13 @@
         </p>
 <!-- progresso do curso -->
 <div class="bg-dark-800/60 rounded-xl border border-dark-600 p-5 mb-8 max-w-md">
-<div aria-label="Progreso del curso" aria-valuemax="100" aria-valuemin="0" class="inema-meter" data-inema-meter="curso" role="progressbar">
-<div class="inema-meter-label flex items-center justify-between mb-2">
+<div aria-label="Progreso del curso" aria-valuemax="100" aria-valuemin="0" class="ARCKHÉ-meter" data-ARCKHÉ-meter="curso" role="progressbar">
+<div class="ARCKHÉ-meter-label flex items-center justify-between mb-2">
 <strong class="text-sm">Tu progreso en el curso</strong>
-<span class="inema-meter-pct text-emerald-400 font-bold">0%</span>
+<span class="ARCKHÉ-meter-pct text-emerald-400 font-bold">0%</span>
 </div>
-<div class="inema-bar"><span class="inema-bar__fill"></span></div>
-<span class="inema-meter-count text-xs text-neutral-400">0 de 66 temas</span>
+<div class="ARCKHÉ-bar"><span class="ARCKHÉ-bar__fill"></span></div>
+<span class="ARCKHÉ-meter-count text-xs text-neutral-400">0 de 66 temas</span>
 </div>
 </div>
 <div class="flex flex-col sm:flex-row gap-3">
@@ -353,9 +353,9 @@
 </div>
 <h3 class="text-lg font-semibold mb-2 group-hover:text-emerald-400 transition-colors">🟢 Fundamentos</h3>
 <p class="text-sm text-neutral-400 mb-4">Por qué STORM supera al prompt único.</p>
-<div aria-label="Progreso de la ruta 1" aria-valuemax="100" aria-valuemin="0" class="inema-meter" data-inema-meter="trilha:1" role="progressbar">
-<div class="inema-bar"><span class="inema-bar__fill"></span></div>
-<span class="inema-meter-count text-xs text-neutral-500">0 de 18</span>
+<div aria-label="Progreso de la ruta 1" aria-valuemax="100" aria-valuemin="0" class="ARCKHÉ-meter" data-ARCKHÉ-meter="trilha:1" role="progressbar">
+<div class="ARCKHÉ-bar"><span class="ARCKHÉ-bar__fill"></span></div>
+<span class="ARCKHÉ-meter-count text-xs text-neutral-500">0 de 18</span>
 </div>
 </a>
 <!-- T2 -->
@@ -366,9 +366,9 @@
 </div>
 <h3 class="text-lg font-semibold mb-2 group-hover:text-blue-400 transition-colors">🔵 Práctica</h3>
 <p class="text-sm text-neutral-400 mb-4">Instalar, configurar y ejecutar la skill.</p>
-<div aria-label="Progreso de la ruta 2" aria-valuemax="100" aria-valuemin="0" class="inema-meter" data-inema-meter="trilha:2" role="progressbar">
-<div class="inema-bar"><span class="inema-bar__fill"></span></div>
-<span class="inema-meter-count text-xs text-neutral-500">0 de 24</span>
+<div aria-label="Progreso de la ruta 2" aria-valuemax="100" aria-valuemin="0" class="ARCKHÉ-meter" data-ARCKHÉ-meter="trilha:2" role="progressbar">
+<div class="ARCKHÉ-bar"><span class="ARCKHÉ-bar__fill"></span></div>
+<span class="ARCKHÉ-meter-count text-xs text-neutral-500">0 de 24</span>
 </div>
 </a>
 <!-- T3 -->
@@ -379,9 +379,9 @@
 </div>
 <h3 class="text-lg font-semibold mb-2 group-hover:text-purple-400 transition-colors">🟣 Avanzado</h3>
 <p class="text-sm text-neutral-400 mb-4">Leer, confiar y ampliar el informe.</p>
-<div aria-label="Progreso de la ruta 3" aria-valuemax="100" aria-valuemin="0" class="inema-meter" data-inema-meter="trilha:3" role="progressbar">
-<div class="inema-bar"><span class="inema-bar__fill"></span></div>
-<span class="inema-meter-count text-xs text-neutral-500">0 de 24</span>
+<div aria-label="Progreso de la ruta 3" aria-valuemax="100" aria-valuemin="0" class="ARCKHÉ-meter" data-ARCKHÉ-meter="trilha:3" role="progressbar">
+<div class="ARCKHÉ-bar"><span class="ARCKHÉ-bar__fill"></span></div>
+<span class="ARCKHÉ-meter-count text-xs text-neutral-500">0 de 24</span>
 </div>
 </a>
 </div>
@@ -423,11 +423,11 @@
 </main>
 <footer class="border-t border-dark-600 py-8 mt-8">
 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
-<p>STORM Research · Curso INEMA · 2026 · <a class="text-sky-400 hover:text-sky-300" href="https://inema.club" target="_blank">INEMA.CLUB</a></p>
+<p>STORM Research · Curso ARCKHÉ · 2026 · <a class="text-sky-400 hover:text-sky-300" href="https://ARCKHÉ AI" target="_blank">ARCKHÉ AI</a></p>
 </div>
-<!-- inema-backlink:v1 -->
-<p style="display:block;width:100%;text-align:center;font-size:.85rem;margin:.75rem 0 0;opacity:.85"><a href="https://www.inema.club/cursos/190-storm-research-pesquisa-multi-perspectiva-verificada-com-claude/" style="color:inherit;text-decoration:underline">Ficha completa de este curso en INEMA.CLUB</a> · <a href="https://www.inema.club/aprender-inteligencia-artificial/" style="color:inherit;text-decoration:underline">Guía: cómo aprender inteligencia artificial</a></p>
-<!-- /inema-backlink:v1 -->
+<!-- ARCKHÉ-backlink:v1 -->
+<p style="display:block;width:100%;text-align:center;font-size:.85rem;margin:.75rem 0 0;opacity:.85"><a href="https://www.ARCKHÉ AI/cursos/190-storm-research-pesquisa-multi-perspectiva-verificada-com-claude/" style="color:inherit;text-decoration:underline">Ficha completa de este curso en ARCKHÉ AI</a> · <a href="https://www.ARCKHÉ AI/aprender-inteligencia-artificial/" style="color:inherit;text-decoration:underline">Guía: cómo aprender inteligencia artificial</a></p>
+<!-- /ARCKHÉ-backlink:v1 -->
 </footer>
 <!-- ===== SCRIPTS NÚCLEO v1 ===== -->
 <script>
@@ -450,9 +450,9 @@
         html.classList.toggle('dark');
         const isDark = html.classList.contains('dark');
         html.style.colorScheme = isDark ? 'dark' : 'light';
-        try { var p = JSON.parse(localStorage.getItem('inema.prefs')||'{}'); p.theme = isDark ? 'inema-dark' : 'claro'; localStorage.setItem('inema.prefs', JSON.stringify(p)); localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch(e){}
+        try { var p = JSON.parse(localStorage.getItem('ARCKHÉ.prefs')||'{}'); p.theme = isDark ? 'ARCKHÉ-dark' : 'claro'; localStorage.setItem('ARCKHÉ.prefs', JSON.stringify(p)); localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch(e){}
         sync();
-        if (window.INEMA && INEMA.applyPrefs) try { INEMA.applyPrefs(); } catch(e){}
+        if (window.ARCKHÉ && ARCKHÉ.applyPrefs) try { ARCKHÉ.applyPrefs(); } catch(e){}
       });
     })();
     function openModal(id){ const m=document.getElementById(id); if(m){ m.classList.remove('hidden'); document.body.style.overflow='hidden'; } }
@@ -461,6 +461,6 @@
   </script>
 <!-- ===== CAMADA DE APRENDIZAGEM ===== -->
 <script src="../assets/learn.js"></script>
-<script>if (window.INEMA && typeof window.INEMA.init === 'function') window.INEMA.init();</script>
+<script>if (window.ARCKHÉ && typeof window.ARCKHÉ.init === 'function') window.ARCKHÉ.init();</script>
 </body>
 </html>
